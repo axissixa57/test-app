@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "antd": "^3.26.8",
+    "axios": "^0.19.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -14,13 +16,14 @@
     "react-scripts": "3.3.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "reset-css": "^5.0.1",
     "styled-components": "^5.0.0"
   },
   "scripts": {
-    "start": "react-app-rewired start --scripts-version react-scripts",
-    "build": "create-app-rewired build",
-    "test": "create-app-rewired test",
-    "eject": "create-app-rewired eject",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
     "lint": "eslint src -c .eslintrc.json --ext js,jsx --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,css,scss}\""
   },
@@ -52,7 +55,7 @@
     "stylelint-processor-styled-components": "^1.9.0"
   },
   "pre-commit": [
-"lint",
-"format"
-]
+    "lint",
+    "format"
+  ]
 }
