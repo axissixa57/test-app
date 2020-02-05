@@ -1,1 +1,1 @@
-// export { default as testActions } from '@/test'
+export { default as goodsActions } from './goods'

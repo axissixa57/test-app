@@ -1,0 +1,4 @@
+export const GOODS = {
+  SET_ITEMS: 'GOODS:SET_ITEMS',
+  SET_IS_LOADING: 'GOODS:SET_IS_LOADING',
+}

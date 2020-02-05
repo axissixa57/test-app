@@ -1,1 +1,1 @@
-// export { default as testActions } from '@/test'
+export * from './actions'
