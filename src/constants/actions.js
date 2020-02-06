@@ -3,3 +3,7 @@ export const GOODS = {
   FILTER_BY_TITLE: 'GOODS:FILTER_BY_TITLE',
   SET_IS_LOADING: 'GOODS:SET_IS_LOADING',
 }
+
+export const THEME = {
+  DARK_MODE: 'THEME:DARK_MODE',
+}

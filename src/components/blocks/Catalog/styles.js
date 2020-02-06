@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Col, Card, Tag } from 'antd'
 
 export const SectionCatalog = styled.div`
@@ -57,6 +57,10 @@ export const Icons = styled.div`
 
 export const StyledTag = styled(Tag)`
   margin-bottom: 0.5rem;
-  color: ${props => (props.color === 'white' ? 'black' : '')};
-  border: ${props => (props.color === 'white' ? '1px solid black' : '')};
+  ${props =>
+    props.color === 'white' &&
+    css`
+      border: 1px solid black;
+      color: black;
+    `};
 `

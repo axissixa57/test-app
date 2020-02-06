@@ -2,15 +2,16 @@ import React from 'react'
 import { Layout } from 'antd'
 
 import { Catalog, Header } from '@/components/blocks/'
+import { Sidebar } from './styles'
 
-const { Footer, Content, Sider } = Layout
+const { Footer, Content } = Layout
 
-const Home = props => {
+const Home = () => {
   return (
     <Layout>
       <Header />
       <Layout>
-        <Sider>Sider</Sider>
+        <Sidebar>Sider</Sidebar>
         <Content>
           <Catalog />
         </Content>

@@ -7,8 +7,7 @@ const Search = ({ onSearch }) => {
     <div className="search">
       <Input.Search
         placeholder="Поиск"
-        onChange={e => onSearch(e.target.value)}
-      />
+        onChange={e => onSearch(e.target.value)} />
     </div>
   )
 }

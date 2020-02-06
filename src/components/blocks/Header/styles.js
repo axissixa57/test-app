@@ -3,6 +3,8 @@ import { PageHeader } from 'antd'
 
 export const Header = styled(PageHeader)`
   border: 1px solid rgb(235, 237, 240);
+  ${props => console.log(props)}
+  background: ${({ theme }) => theme.whitesmoke};
 
   & > div {
     display: flex;

@@ -3,14 +3,18 @@ import { Provider } from 'react-redux'
 
 import Router from '@/Router'
 import store from '@/store'
-
 import { GlobalStyle } from '@/theme/globalStyle'
+import { ThemeProviderWrapper } from '@/components/wrappers'
 
-const App = () => (
-  <Provider store={store}>
-    <GlobalStyle />
-    <Router />
-  </Provider>
-)
+const App = () => {
+  return (
+    <Provider store={store}>
+      <GlobalStyle />
+      <ThemeProviderWrapper>
+        <Router />
+      </ThemeProviderWrapper>
+    </Provider>
+  )
+}
 
 export default App

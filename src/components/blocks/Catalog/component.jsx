@@ -19,7 +19,10 @@ const Catalog = ({ goods }) => {
     <SectionCatalog>
       {goods.map(item => {
         return (
-          <Column key={item._id.$oid} xs={24} sm={24} md={12} lg={8} xl={6}>
+          <Column
+            key={item._id.$oid} xs={24} sm={24} md={12}
+            lg={8} xl={6}
+          >
             <CardComponent
               hoverable
               cover={<img alt={item.title} src={item.images[0]} />}
@@ -49,7 +52,18 @@ const Catalog = ({ goods }) => {
 }
 
 Catalog.propTypes = {
-  goods: PropTypes.array,
+  goods: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.shape({
+        $oid: PropTypes.string,
+      }),
+      title: PropTypes.string,
+      description: PropTypes.string,
+      rating: PropTypes.number,
+      images: PropTypes.arrayOf(PropTypes.string),
+      color: PropTypes.arrayOf(PropTypes.string),
+    }),
+  ).isRequired,
 }
 
 export default Catalog
