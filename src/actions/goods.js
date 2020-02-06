@@ -11,6 +11,10 @@ const actions = {
       dispatch(actions.setGoods(data))
     })
   },
+  filterByTitleGoods: text => ({
+    type: GOODS.FILTER_BY_TITLE,
+    payload: text,
+  }),
 }
 
 export default actions

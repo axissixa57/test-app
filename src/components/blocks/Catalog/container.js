@@ -19,5 +19,5 @@ CatalogContainer.propTypes = {
 }
 
 export default connect(({ goods }) => ({
-  goods: goods.items,
+  goods: goods.filteredItems,
 }), goodsActions)(CatalogContainer)

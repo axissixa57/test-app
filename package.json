@@ -25,7 +25,8 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "lint": "eslint src -c .eslintrc.json --ext js,jsx --fix",
-    "format": "prettier --write \"src/**/*.{js,jsx,css,scss}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,css,scss}\"",
+    "server": "json-server --watch --port 3001 data.json"
   },
   "eslintConfig": {
     "extends": "react-app"
