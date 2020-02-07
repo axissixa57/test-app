@@ -11,6 +11,11 @@ const actions = {
       dispatch(actions.setGoods(data))
     })
   },
+  fetchPartGoods: (start, end) => dispatch => {
+    goodsApi.getPart(start, end).then(({ data }) => {
+      dispatch(actions.setGoods(data))
+    })
+  },
   filterByTitleGoods: text => ({
     type: GOODS.FILTER_BY_TITLE,
     payload: text,

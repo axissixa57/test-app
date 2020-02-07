@@ -9,6 +9,8 @@ const UserbarContainer = ({ darkMode }) => {
   return <Userbar darkMode={darkMode} />
 }
 
-UserbarContainer.propTypes = {}
+UserbarContainer.propTypes = {
+  darkMode: PropTypes.func,
+}
 
 export default connect(null, themeActions)(UserbarContainer)

@@ -5,12 +5,14 @@ import antdCss from 'antd/dist/antd.css'
 export const dark = {
   primary: '#001529',
   secondary: '#fff',
+  black: '#000',
   bulb: 'yellow',
 }
 
 export const light = {
   primary: 'whitesmoke',
   secondary: '#000',
+  black: '#000',
   bulb: 'grey',
 }
 

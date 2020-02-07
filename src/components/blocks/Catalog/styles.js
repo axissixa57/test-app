@@ -1,11 +1,30 @@
 import styled, { css } from 'styled-components'
-import { Col, Card, Tag } from 'antd'
+import { Col, Card, Tag, Pagination } from 'antd'
 
 export const SectionCatalog = styled.div`
+  padding: 1rem;
+`
+export const PaginationBlock = styled(Pagination)`
+  display: flex;
+  justify-content: center;
+
+  .ant-pagination-item a {
+    color: ${({ theme }) => theme.secondary};
+  }
+
+  .ant-pagination-item-active a {
+    color: ${({ theme }) => theme.black};
+  }
+
+  .ant-pagination-item-link {
+    color: ${({ theme }) => theme.secondary};
+  }
+`
+
+export const Goods = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  padding: 1rem;
 `
 
 export const Column = styled(Col)`

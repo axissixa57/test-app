@@ -1,5 +1,4 @@
 import { THEME } from '@/constants'
-import { dark } from '@/theme/globalStyle'
 
 const actions = {
   darkMode: () => ({

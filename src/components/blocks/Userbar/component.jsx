@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
+import PropTypes from 'prop-types'
 
 import { Basket, UserBarStyled, ButtonLogin, ButtonBulb } from './styles'
 
@@ -14,6 +15,10 @@ const UserBar = ({ darkMode }) => {
       </Basket>
     </UserBarStyled>
   )
+}
+
+UserBar.propTypes = {
+  darkMode: PropTypes.func,
 }
 
 export default UserBar
