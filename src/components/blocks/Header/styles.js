@@ -3,12 +3,15 @@ import { PageHeader } from 'antd'
 
 export const Header = styled(PageHeader)`
   border: 1px solid rgb(235, 237, 240);
-  ${props => console.log(props)}
-  background: ${({ theme }) => theme.whitesmoke};
-
+  background: ${({ theme }) => theme.primary};
+  
   & > div {
     display: flex;
     justify-content: space-between;
+  }
+
+  .ant-page-header-heading-title {
+    color: ${({ theme }) => theme.secondary};
   }
 
   span + span {

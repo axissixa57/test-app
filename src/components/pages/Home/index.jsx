@@ -2,9 +2,7 @@ import React from 'react'
 import { Layout } from 'antd'
 
 import { Catalog, Header } from '@/components/blocks/'
-import { Sidebar } from './styles'
-
-const { Footer, Content } = Layout
+import { Sidebar, Main, FooterBlock } from './styles'
 
 const Home = () => {
   return (
@@ -12,11 +10,11 @@ const Home = () => {
       <Header />
       <Layout>
         <Sidebar>Sider</Sidebar>
-        <Content>
+        <Main>
           <Catalog />
-        </Content>
+        </Main>
       </Layout>
-      <Footer>Footer</Footer>
+      <FooterBlock>Footer</FooterBlock>
     </Layout>
   )
 }
