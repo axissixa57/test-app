@@ -6,6 +6,10 @@ const actions = {
     type: GOODS.SET_ITEMS,
     payload: items,
   }),
+  setPartGoods: items => ({
+    type: GOODS.SET_PART_ITEMS,
+    payload: items,
+  }),
   fetchGoods: () => dispatch => {
     goodsApi.getAll().then(({ data }) => {
       dispatch(actions.setGoods(data))
@@ -13,13 +17,13 @@ const actions = {
   },
   fetchPartGoods: (start, end) => dispatch => {
     goodsApi.getPart(start, end).then(({ data }) => {
-      dispatch(actions.setGoods(data))
+      dispatch(actions.setPartGoods(data))
     })
   },
-  filterByTitleGoods: text => ({
-    type: GOODS.FILTER_BY_TITLE,
-    payload: text,
-  }),
+  filterByTitleGoods: text => dispatch =>
+    goodsApi.searchByTiitle(text).then(({ data }) => {
+      dispatch(actions.setGoods(data))
+    }),
 }
 
 export default actions

@@ -2,7 +2,7 @@ import { GOODS } from '@/constants'
 
 const initialState = {
   items: [],
-  filteredItems: [],
+  quantityOfGoods: 0,
   isLoading: false,
 }
 
@@ -12,15 +12,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         items: payload,
-        filteredItems: payload,
         isLoading: false,
       }
-    case GOODS.FILTER_BY_TITLE:
+    case GOODS.SET_PART_ITEMS:
       return {
         ...state,
-        filteredItems: state.items.filter(
-          good => good.title.toLowerCase().indexOf(payload.toLowerCase()) >= 0,
-        ),
+        items: payload,
       }
     case GOODS.SET_IS_LOADING:
       return {

@@ -5,9 +5,8 @@ import PropTypes from 'prop-types'
 import Catalog from './component'
 import { goodsActions } from '@/actions/'
 
-const CatalogContainer = ({ goods, fetchGoods, fetchPartGoods }) => {
+const CatalogContainer = ({ goods, quantityOfGoods, fetchPartGoods }) => {
   useEffect(() => {
-    // fetchGoods()
     fetchPartGoods(0, 8)
   }, [])
 
@@ -18,18 +17,19 @@ const CatalogContainer = ({ goods, fetchGoods, fetchPartGoods }) => {
     fetchPartGoods(minValue, maxValue)
   }
 
-  return <Catalog goods={goods} onChangePage={handleChangePage} />
+  return <Catalog goods={goods} quantityOfGoods={quantityOfGoods} onChangePage={handleChangePage} />
 }
 
 CatalogContainer.propTypes = {
   goods: PropTypes.array,
-  fetchGoods: PropTypes.func,
+  // quantityOfGoods: PropTypes.number,
   fetchPartGoods: PropTypes.func,
 }
 
 export default connect(
   ({ goods }) => ({
-    goods: goods.filteredItems,
+    goods: goods.items,
+    quantityOfGoods: goods.quantityOfGoods,
   }),
   goodsActions,
 )(CatalogContainer)
