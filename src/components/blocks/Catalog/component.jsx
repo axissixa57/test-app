@@ -16,7 +16,7 @@ import {
 
 const { Meta } = Card
 
-const Catalog = ({ goods, quantityOfGoods, onChangePage }) => {
+const Catalog = ({ goods, onChangePage }) => {
   return (
     <SectionCatalog>
       <Goods>
@@ -53,7 +53,6 @@ const Catalog = ({ goods, quantityOfGoods, onChangePage }) => {
       </Goods>
       <PaginationBlock
         defaultCurrent={1}
-        // total={quantityOfGoods}
         total={34}
         pageSize={8}
         size="small"
@@ -75,8 +74,7 @@ Catalog.propTypes = {
       color: PropTypes.arrayOf(PropTypes.string),
     }),
   ).isRequired,
-  onChangePage: PropTypes.func,
-  quantityOfGoods: PropTypes.number,
+  onChangePage: PropTypes.func.isRequired,
 }
 
 export default Catalog

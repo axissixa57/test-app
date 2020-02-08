@@ -12,7 +12,7 @@ const SearchContainer = ({ filterByTitleGoods }) => {
   const [goods, setGoods] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const onChangeInput = (value = '') => {
+  const onChangeInput = value => {
     setInputValue(value)
     setVisible(true)
     if (value) filterByTitleGoods(value)
@@ -27,20 +27,18 @@ const SearchContainer = ({ filterByTitleGoods }) => {
   }
 
   const onSearch = value => {
-    setIsLoading(true)
-    goodsApi
-      .searchByTiitle(value)
-      .then(({ data }) => {
-        setGoods(data)
-        setIsLoading(false)
-      })
-      .catch(() => {
-        setIsLoading(false)
-      })
-  }
-
-  const handleChangeInput = value => {
-    setInputValue(value)
+    if (value) {
+      setIsLoading(true)
+      goodsApi
+        .searchByTiitle(value)
+        .then(({ data }) => {
+          setGoods(data)
+          setIsLoading(false)
+        })
+        .catch(() => {
+          setIsLoading(false)
+        })
+    }
   }
 
   return (
@@ -53,8 +51,7 @@ const SearchContainer = ({ filterByTitleGoods }) => {
       onSearch={onSearch}
       onChangeInput={onChangeInput}
       onClose={onClose}
-      onShow={onShow}
-    />
+      onShow={onShow} />
   )
 }
 

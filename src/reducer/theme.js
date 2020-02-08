@@ -11,8 +11,8 @@ export default (state = initialState, { type, payload }) => {
     case THEME.DARK_MODE:
       return {
         ...state,
-        backgroundColor: state.switch ? light : dark,
         switch: !state.switch,
+        backgroundColor: state.switch ? light : dark,
       }
     default:
       return state

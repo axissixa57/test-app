@@ -2,7 +2,6 @@ import { GOODS } from '@/constants'
 
 const initialState = {
   items: [],
-  quantityOfGoods: 0,
   isLoading: false,
 }
 
