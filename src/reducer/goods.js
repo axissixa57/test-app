@@ -3,6 +3,8 @@ import { GOODS } from '@/constants'
 const initialState = {
   items: [],
   isLoading: false,
+  isFilteredByPopular: false,
+  filterName: '',
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -12,6 +14,11 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         items: payload,
         isLoading: false,
+      }
+    case GOODS.SET_FILTERNAME:
+      return {
+        ...state,
+        filterName: payload,
       }
     case GOODS.SET_PART_ITEMS:
       return {

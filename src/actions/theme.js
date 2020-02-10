@@ -1,7 +1,7 @@
 import { THEME } from '@/constants'
 
 const actions = {
-  darkMode: () => ({
+  switchDarkMode: () => ({
     type: THEME.DARK_MODE,
   }),
 }

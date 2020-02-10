@@ -2,8 +2,10 @@ import React from 'react'
 import { Card, Rate, Button } from 'antd'
 import PropTypes from 'prop-types'
 
+import { Filter } from '@/components/blocks/'
 import {
   SectionCatalog,
+  FilterDiv,
   PaginationBlock,
   Goods,
   Column,
@@ -19,6 +21,9 @@ const { Meta } = Card
 const Catalog = ({ goods, onChangePage }) => {
   return (
     <SectionCatalog>
+      <FilterDiv>
+        <Filter />
+      </FilterDiv>
       <Goods>
         {goods.map(item => {
           return (

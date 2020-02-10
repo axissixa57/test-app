@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 
 import { Basket, UserBarStyled, ButtonLogin, ButtonBulb } from './styles'
 
-const UserBar = ({ darkMode }) => {
+const UserBar = ({ switchDarkMode }) => {
   return (
     <UserBarStyled>
       <Basket>
         <ButtonLogin>Login</ButtonLogin>
-        <ButtonBulb onClick={darkMode}>
+        <ButtonBulb onClick={switchDarkMode}>
           <Icon type="bulb" />
         </ButtonBulb>
       </Basket>
@@ -18,7 +18,7 @@ const UserBar = ({ darkMode }) => {
 }
 
 UserBar.propTypes = {
-  darkMode: PropTypes.func,
+  switchDarkMode: PropTypes.func,
 }
 
 export default UserBar

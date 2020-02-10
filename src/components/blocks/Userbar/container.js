@@ -5,12 +5,12 @@ import PropTypes from 'prop-types'
 import Userbar from './component'
 import { themeActions } from '@/actions'
 
-const UserbarContainer = ({ darkMode }) => {
-  return <Userbar darkMode={darkMode} />
+const UserbarContainer = ({ switchDarkMode }) => {
+  return <Userbar switchDarkMode={switchDarkMode} />
 }
 
 UserbarContainer.propTypes = {
-  darkMode: PropTypes.func,
+  switchDarkMode: PropTypes.func,
 }
 
 export default connect(null, themeActions)(UserbarContainer)

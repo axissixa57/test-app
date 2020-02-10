@@ -4,6 +4,12 @@ import { Col, Card, Tag, Pagination } from 'antd'
 export const SectionCatalog = styled.div`
   padding: 1rem;
 `
+export const FilterDiv = styled.div`
+  position: relative;
+  display:flex;
+  justify-content: flex-end;
+  padding: 0px 2rem 1rem;
+`
 export const PaginationBlock = styled(Pagination)`
   display: flex;
   justify-content: center;
