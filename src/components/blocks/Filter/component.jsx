@@ -2,7 +2,7 @@ import React from 'react'
 import { Menu, Dropdown, Button } from 'antd'
 import PropTypes from 'prop-types'
 
-const Filter = ({ onChangeFilter }) => {
+const Filter = ({ onChangeFilter, buttonValue }) => {
   const menu = (
     <Menu>
       <Menu.Item key="rating" onClick={onChangeFilter}>
@@ -16,7 +16,7 @@ const Filter = ({ onChangeFilter }) => {
   return (
     <>
       <Dropdown overlay={menu} placement="bottomCenter">
-        <Button>Sorting by</Button>
+        <Button>{buttonValue}</Button>
       </Dropdown>
     </>
   )
@@ -24,6 +24,7 @@ const Filter = ({ onChangeFilter }) => {
 
 Filter.propTypes = {
   onChangeFilter: PropTypes.func.isRequired,
+  buttonValue: PropTypes.string.isRequired,
 }
 
 export default Filter

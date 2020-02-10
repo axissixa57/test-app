@@ -30,8 +30,6 @@ const actions = {
     }),
   fetchFiltredGoods: (sort, order, start, end) => dispatch => {
     goodsApi.filterBy(sort, order, start, end).then(({ data }) => {
-      dispatch(actions.setPartGoods(data))
-
       if (sort === 'price') {
         sort === 'price' && order === 'asc'
           ? dispatch(actions.setFilterName('priceAsc'))
@@ -39,6 +37,8 @@ const actions = {
       } else {
         dispatch(actions.setFilterName(sort))
       }
+
+      dispatch(actions.setPartGoods(data))
     })
   },
 }

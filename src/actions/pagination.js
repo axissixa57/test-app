@@ -2,7 +2,7 @@ import { PAGINATION } from '@/constants'
 
 const actions = {
   changeCurrentPage: page => ({
-    type: PAGINATION.CURRENT_PAGE,
+    type: PAGINATION.SET_CURRENT_PAGE,
     payload: page,
   }),
 }

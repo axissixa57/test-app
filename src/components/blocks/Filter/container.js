@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -6,6 +6,8 @@ import Filter from './component'
 import { goodsActions } from '@/actions/'
 
 const FilterContainer = ({ currentPage, fetchFiltredGoods }) => {
+  const [buttonValue, setButtonValue] = useState('Sorting by')
+
   const handleChangeFilter = val => {
     const sort = val.key
 
@@ -14,14 +16,17 @@ const FilterContainer = ({ currentPage, fetchFiltredGoods }) => {
 
     if (sort === 'rating') {
       fetchFiltredGoods(sort, 'desc', minValue, maxValue)
+      setButtonValue('Sort by: popularity')
     } else if (sort === 'priceAsc') {
       fetchFiltredGoods('price', 'asc', minValue, maxValue)
+      setButtonValue('Sort by: cheaper')
     } else if (sort === 'priceDesc') {
       fetchFiltredGoods('price', 'desc', minValue, maxValue)
+      setButtonValue('Sort by: expensive')
     }
   }
 
-  return <Filter onChangeFilter={handleChangeFilter} />
+  return <Filter onChangeFilter={handleChangeFilter} buttonValue={buttonValue} />
 }
 
 FilterContainer.propTypes = {
