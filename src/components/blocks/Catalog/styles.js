@@ -4,7 +4,7 @@ import { Col, Card, Tag, Pagination } from 'antd'
 export const SectionCatalog = styled.div`
   padding: 1rem;
 `
-export const FilterDiv = styled.div`
+export const OrderDiv = styled.div`
   position: relative;
   display:flex;
   justify-content: flex-end;

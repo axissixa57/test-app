@@ -1,30 +1,74 @@
 import React from 'react'
-import { Menu, Dropdown, Button } from 'antd'
+import { Checkbox, Input } from 'antd'
 import PropTypes from 'prop-types'
 
-const Filter = ({ onChangeFilter, buttonValue }) => {
-  const menu = (
-    <Menu>
-      <Menu.Item key="rating" onClick={onChangeFilter}>
-        Popular
-      </Menu.Item>
-      <Menu.Item key="priceAsc" onClick={onChangeFilter}>Cheap</Menu.Item>
-      <Menu.Item key="priceDesc" onClick={onChangeFilter}>Expensive</Menu.Item>
-    </Menu>
-  )
+import { FilterWrapper } from './styles'
+
+const Filter = () => {
+  function onChange (e) {
+    console.log(`checked = ${e.target.checked}`)
+  }
 
   return (
-    <>
-      <Dropdown overlay={menu} placement="bottomCenter">
-        <Button>{buttonValue}</Button>
-      </Dropdown>
-    </>
+    <FilterWrapper>
+      <div className="filtr-product-type">
+        <p>Product type</p>
+        <div>
+          <Checkbox onChange={onChange}>Polos</Checkbox>
+          <Checkbox onChange={onChange}>Pants</Checkbox>
+          <Checkbox onChange={onChange}>Shirts</Checkbox>
+          <Checkbox onChange={onChange}>Jackets</Checkbox>
+          <Checkbox onChange={onChange}>Dresses</Checkbox>
+          <Checkbox onChange={onChange}>Cardigans</Checkbox>
+          <Checkbox onChange={onChange}>Tops</Checkbox>
+          <Checkbox onChange={onChange}>Trench Coats</Checkbox>
+        </div>
+      </div>
+      <div className="filtr-product-size">
+        <p>Product size</p>
+        <div>
+          <Checkbox onChange={onChange}>XS</Checkbox>
+          <Checkbox onChange={onChange}>S</Checkbox>
+          <Checkbox onChange={onChange}>M</Checkbox>
+          <Checkbox onChange={onChange}>L</Checkbox>
+          <Checkbox onChange={onChange}>XL</Checkbox>
+        </div>
+      </div>
+      <div className="filtr-product-color">
+        <p>Product color</p>
+        <div>
+          <Checkbox onChange={onChange}>blue</Checkbox>
+          <Checkbox onChange={onChange}>green</Checkbox>
+          <Checkbox onChange={onChange}>yellow</Checkbox>
+          <Checkbox onChange={onChange}>orange</Checkbox>
+          <Checkbox onChange={onChange}>red</Checkbox>
+          <Checkbox onChange={onChange}>brown</Checkbox>
+          <Checkbox onChange={onChange}>purple</Checkbox>
+        </div>
+      </div>
+      <div className="filtr-product-cost">
+        <p>Product cost</p>
+        <div>
+          <Input
+            type="number"
+            placeholder="от"
+            formatter={value =>
+              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            parser={value => value.replace(/\$\s?|(,*)/g, '')}
+            onChange={onChange} />
+          <Input
+            type="number"
+            placeholder="до"
+            formatter={value =>
+              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            parser={value => value.replace(/\$\s?|(,*)/g, '')}
+            onChange={onChange} />
+        </div>
+      </div>
+    </FilterWrapper>
   )
 }
 
-Filter.propTypes = {
-  onChangeFilter: PropTypes.func.isRequired,
-  buttonValue: PropTypes.string.isRequired,
-}
+Filter.propTypes = {}
 
 export default Filter

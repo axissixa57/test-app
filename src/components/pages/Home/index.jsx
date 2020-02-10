@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout } from 'antd'
 
-import { Catalog, Header } from '@/components/blocks/'
+import { Catalog, Header, Filter } from '@/components/blocks/'
 import { Sidebar, Main, FooterBlock } from './styles'
 
 const Home = () => {
@@ -9,7 +9,18 @@ const Home = () => {
     <Layout>
       <Header />
       <Layout>
-        <Sidebar>Sider</Sidebar>
+        <Sidebar
+          breakpoint="lg"
+          collapsedWidth="0"
+          onBreakpoint={broken => {
+            console.log(broken)
+          }}
+          onCollapse={(collapsed, type) => {
+            console.log(collapsed, type)
+          }}
+        >
+          <Filter />
+        </Sidebar>
         <Main>
           <Catalog />
         </Main>

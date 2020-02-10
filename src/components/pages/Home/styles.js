@@ -8,8 +8,8 @@ export const Sidebar = styled(Sider)`
   border-right: 1px solid rgb(235, 237, 240);
   border-left: 1px solid rgb(235, 237, 240);
 
-  .ant-layout-sider-children {
-    padding: 1rem;
+  .ant-layout-sider-zero-width-trigger {
+    background: purple;
   }
 `
 export const Main = styled(Content)`
