@@ -9,7 +9,7 @@ const CatalogContainer = ({
   goods,
   filterName,
   fetchPartGoods,
-  fetchFiltredGoods,
+  fetchSortedGoods,
   changeCurrentPage,
 }) => {
   useEffect(() => {
@@ -20,17 +20,16 @@ const CatalogContainer = ({
     const minValue = (page - 1) * 8
     const maxValue = page * 8
 
-    // dispatch current page
     changeCurrentPage(page)
 
     if (!filterName) {
       fetchPartGoods(minValue, maxValue)
     } else if (filterName === 'rating') {
-      fetchFiltredGoods(filterName, 'desc', minValue, maxValue)
+      fetchSortedGoods(filterName, 'desc', minValue, maxValue)
     } else if (filterName === 'priceAsc') {
-      fetchFiltredGoods('price', 'asc', minValue, maxValue)
+      fetchSortedGoods('price', 'asc', minValue, maxValue)
     } else if (filterName === 'priceDesc') {
-      fetchFiltredGoods('price', 'desc', minValue, maxValue)
+      fetchSortedGoods('price', 'desc', minValue, maxValue)
     }
   }
 
@@ -45,13 +44,13 @@ CatalogContainer.propTypes = {
   goods: PropTypes.array.isRequired,
   filterName: PropTypes.string.isRequired,
   fetchPartGoods: PropTypes.func.isRequired,
-  fetchFiltredGoods: PropTypes.func.isRequired,
+  fetchSortedGoods: PropTypes.func.isRequired,
   changeCurrentPage: PropTypes.func.isRequired,
 }
 
 export default connect(
   ({ goods }) => ({
-    goods: goods.items,
+    goods: goods.filtredItems.length ? goods.filtredItems : goods.items,
     filterName: goods.filterName,
   }),
   { ...goodsActions, ...paginationActions },

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Order from './component'
 import { goodsActions } from '@/actions/'
 
-const OrderContainer = ({ currentPage, fetchFiltredGoods }) => {
+const OrderContainer = ({ currentPage, fetchSortedGoods }) => {
   const [buttonValue, setButtonValue] = useState('Sorting by')
 
   const handleChangeFilter = val => {
@@ -15,13 +15,13 @@ const OrderContainer = ({ currentPage, fetchFiltredGoods }) => {
     const maxValue = currentPage * 8
 
     if (sort === 'rating') {
-      fetchFiltredGoods(sort, 'desc', minValue, maxValue)
+      fetchSortedGoods(sort, 'desc', minValue, maxValue)
       setButtonValue('Sort by: popularity')
     } else if (sort === 'priceAsc') {
-      fetchFiltredGoods('price', 'asc', minValue, maxValue)
+      fetchSortedGoods('price', 'asc', minValue, maxValue)
       setButtonValue('Sort by: cheaper')
     } else if (sort === 'priceDesc') {
-      fetchFiltredGoods('price', 'desc', minValue, maxValue)
+      fetchSortedGoods('price', 'desc', minValue, maxValue)
       setButtonValue('Sort by: expensive')
     }
   }
@@ -31,7 +31,7 @@ const OrderContainer = ({ currentPage, fetchFiltredGoods }) => {
 
 OrderContainer.propTypes = {
   currentPage: PropTypes.number.isRequired,
-  fetchFiltredGoods: PropTypes.func.isRequired,
+  fetchSortedGoods: PropTypes.func.isRequired,
 }
 
 export default connect(

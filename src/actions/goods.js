@@ -14,6 +14,14 @@ const actions = {
     type: GOODS.SET_PART_ITEMS,
     payload: items,
   }),
+  setPartFilteredGoods: items => ({
+    type: GOODS.SET_FILTRED_ITEMS,
+    payload: items,
+  }),
+  deletePartFilteredItems: items => ({
+    type: GOODS.DELETE_PART_FILTERED_ITEMS,
+    payload: items,
+  }),
   fetchGoods: () => dispatch => {
     goodsApi.getAll().then(({ data }) => {
       dispatch(actions.setGoods(data))
@@ -24,12 +32,13 @@ const actions = {
       dispatch(actions.setPartGoods(data))
     })
   },
-  filterByTitleGoods: text => dispatch =>
+  filterByTitleGoods: text => dispatch => {
     goodsApi.searchByTiitle(text).then(({ data }) => {
       dispatch(actions.setGoods(data))
-    }),
-  fetchFiltredGoods: (sort, order, start, end) => dispatch => {
-    goodsApi.filterBy(sort, order, start, end).then(({ data }) => {
+    })
+  },
+  fetchSortedGoods: (sort, order, start, end) => dispatch => {
+    goodsApi.sortBy(sort, order, start, end).then(({ data }) => {
       if (sort === 'price') {
         sort === 'price' && order === 'asc'
           ? dispatch(actions.setFilterName('priceAsc'))
@@ -39,6 +48,19 @@ const actions = {
       }
 
       dispatch(actions.setPartGoods(data))
+    })
+  },
+  fetchfilteredGoods: (filterName, value) => (dispatch) => {
+    goodsApi.filterBy(filterName, value).then(({ data }) => {
+      if (value === 'S' || value === 'L') {
+        const dataWithoutPrefixX = data.filter(
+          good => good.size.indexOf(value) >= 0,
+        )
+
+        dispatch(actions.setPartFilteredGoods(dataWithoutPrefixX))
+      } else {
+        dispatch(actions.setPartFilteredGoods(data))
+      }
     })
   },
 }

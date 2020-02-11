@@ -56,6 +56,7 @@ const Catalog = ({ goods, onChangePage }) => {
           )
         })}
       </Goods>
+      {/* http://localhost:3001/data?_page=1 - в headers: s-Total-Count вернёт общее кол-во */}
       <PaginationBlock
         defaultCurrent={1}
         total={34}
