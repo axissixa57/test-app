@@ -1,13 +1,8 @@
 import React from 'react'
 import { Select, Input, Form, Modal } from 'antd'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
 
 const { Option } = Select
-
-const TestOption = styled(Option)`
-  background: 'red';
-`
 
 const Search = ({ visible, inputValue, goods, onClose, onShow, onSearch }) => {
   const options = goods.map(good => (
@@ -35,9 +30,6 @@ const Search = ({ visible, inputValue, goods, onClose, onShow, onSearch }) => {
             placeholder="Поиск"
             showSearch
           >
-            {/* <TestOption key="1">{123}</TestOption>
-            <TestOption key="2">{123}</TestOption>
-            <TestOption key="3">{123}</TestOption> */}
             {options}
           </Select>
         </Form>

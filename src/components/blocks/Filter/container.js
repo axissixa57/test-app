@@ -6,9 +6,7 @@ import { goodsActions } from '@/actions'
 import Filter from './component'
 
 const FilterContainer = ({
-  goods,
   fetchfilteredGoods,
-  deletePartFilteredItems,
   setTagGood,
   deleteTagGood,
   setColorGood,
@@ -48,17 +46,12 @@ const FilterContainer = ({
       filterName === 'tags' && setTagGood(val)
       filterName === 'size' && setSizeGood(val)
       filterName === 'color' && setColorGood(val)
+
       fetchfilteredGoods(filterName, val)
     } else {
-      const newGoods = goods.filter(
-        good => !(good[filterName].indexOf(val) >= 0),
-      )
-
       filterName === 'tags' && deleteTagGood(val)
       filterName === 'size' && deleteSizeGood(val)
       filterName === 'color' && deleteColorGood(val)
-
-      // deletePartFilteredItems(newGoods)
 
       fetchfilteredGoods(filterName, val)
     }
@@ -75,9 +68,13 @@ const FilterContainer = ({
 }
 
 FilterContainer.propTypes = {
-  goods: PropTypes.array.isRequired,
   fetchfilteredGoods: PropTypes.func.isRequired,
-  deletePartFilteredItems: PropTypes.func.isRequired,
+  setTagGood: PropTypes.func.isRequired,
+  deleteTagGood: PropTypes.func.isRequired,
+  setColorGood: PropTypes.func.isRequired,
+  deleteColorGood: PropTypes.func.isRequired,
+  setSizeGood: PropTypes.func.isRequired,
+  deleteSizeGood: PropTypes.func.isRequired,
 }
 
 export default connect(

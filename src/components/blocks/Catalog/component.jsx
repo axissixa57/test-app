@@ -18,7 +18,7 @@ import {
 
 const { Meta } = Card
 
-const Catalog = ({ goods, onChangePage }) => {
+const Catalog = ({ goods, currentPage, totalCount, onChangePage }) => {
   return (
     <SectionCatalog>
       <OrderDiv>
@@ -57,10 +57,9 @@ const Catalog = ({ goods, onChangePage }) => {
           )
         })}
       </Goods>
-      {/* http://localhost:3001/data?_page=1 - в headers: s-Total-Count вернёт общее кол-во */}
       <PaginationBlock
-        defaultCurrent={1}
-        total={34}
+        current={currentPage}
+        total={totalCount}
         pageSize={8}
         size="small"
         onChange={onChangePage} />
@@ -81,6 +80,8 @@ Catalog.propTypes = {
       color: PropTypes.arrayOf(PropTypes.string),
     }),
   ).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  totalCount: PropTypes.number.isRequired,
   onChangePage: PropTypes.func.isRequired,
 }
 

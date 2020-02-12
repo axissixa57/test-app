@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import { GOODS } from '@/constants'
 
 const initialState = {
@@ -9,6 +7,7 @@ const initialState = {
   tagsGoods: [],
   sizeGoods: [],
   colorGoods: [],
+  totalCount: 0,
   isLoading: false,
 }
 
@@ -23,9 +22,8 @@ export default (state = initialState, { type, payload }) => {
     case GOODS.SET_FILTRED_ITEMS:
       return {
         ...state,
-        // filtredItems: [...state.filtredItems, ...payload],
-        // filtredItems: _.unionBy(state.filtredItems, payload, '_id.$oid'),
-        filtredItems: payload,
+        filtredItems: payload.items,
+        totalCount: +payload.count,
       }
     case GOODS.SET_FILTERNAME:
       return {

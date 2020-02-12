@@ -4,12 +4,16 @@ import PropTypes from 'prop-types'
 
 import Catalog from './component'
 import { goodsActions, paginationActions } from '@/actions/'
+import { sortGoods } from '@/helpers/'
 
 const CatalogContainer = ({
   goods,
+  currentPage,
+  totalCount,
   filterName,
   fetchPartGoods,
   fetchSortedGoods,
+  fetchfilteredGoods,
   changeCurrentPage,
 }) => {
   useEffect(() => {
@@ -17,41 +21,37 @@ const CatalogContainer = ({
   }, [])
 
   const handleChangePage = page => {
-    const minValue = (page - 1) * 8
-    const maxValue = page * 8
-
     changeCurrentPage(page)
-
-    if (!filterName) {
-      fetchPartGoods(minValue, maxValue)
-    } else if (filterName === 'rating') {
-      fetchSortedGoods(filterName, 'desc', minValue, maxValue)
-    } else if (filterName === 'priceAsc') {
-      fetchSortedGoods('price', 'asc', minValue, maxValue)
-    } else if (filterName === 'priceDesc') {
-      fetchSortedGoods('price', 'desc', minValue, maxValue)
-    }
+    sortGoods(page, filterName, fetchfilteredGoods, fetchSortedGoods)
   }
 
   return (
     <Catalog
       goods={goods}
+      currentPage={currentPage}
+      totalCount={totalCount}
       onChangePage={handleChangePage} />
   )
 }
 
 CatalogContainer.propTypes = {
   goods: PropTypes.array.isRequired,
+  totalCount: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
   filterName: PropTypes.string.isRequired,
   fetchPartGoods: PropTypes.func.isRequired,
   fetchSortedGoods: PropTypes.func.isRequired,
+  fetchfilteredGoods: PropTypes.func.isRequired,
   changeCurrentPage: PropTypes.func.isRequired,
 }
 
 export default connect(
-  ({ goods }) => ({
+  ({ goods, pagination }) => ({
     goods: goods.filtredItems.length ? goods.filtredItems : goods.items,
+    // goods: goods.filtredItems,
     filterName: goods.filterName,
+    totalCount: goods.totalCount,
+    currentPage: pagination.currentPage,
   }),
   { ...goodsActions, ...paginationActions },
 )(CatalogContainer)
