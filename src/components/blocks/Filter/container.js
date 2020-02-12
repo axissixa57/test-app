@@ -9,6 +9,12 @@ const FilterContainer = ({
   goods,
   fetchfilteredGoods,
   deletePartFilteredItems,
+  setTagGood,
+  deleteTagGood,
+  setColorGood,
+  deleteColorGood,
+  setSizeGood,
+  deleteSizeGood,
 }) => {
   const types = [
     'Polos',
@@ -21,18 +27,40 @@ const FilterContainer = ({
     'Trench Coats',
   ]
   const sizes = ['XS', 'S', 'M', 'L', 'XL']
-  const colors = ['blue', 'green', 'yellow', 'orange', 'red', 'brown', 'purple']
+  const colors = [
+    'blue',
+    'green',
+    'yellow',
+    'orange',
+    'pink',
+    'red',
+    'brown',
+    'purple',
+    'black',
+    'grey',
+    'white',
+  ]
 
   const handleChange = e => {
     const { filterName, val } = e.target
 
     if (e.target.checked) {
+      filterName === 'tags' && setTagGood(val)
+      filterName === 'size' && setSizeGood(val)
+      filterName === 'color' && setColorGood(val)
       fetchfilteredGoods(filterName, val)
     } else {
       const newGoods = goods.filter(
         good => !(good[filterName].indexOf(val) >= 0),
       )
-      deletePartFilteredItems(newGoods)
+
+      filterName === 'tags' && deleteTagGood(val)
+      filterName === 'size' && deleteSizeGood(val)
+      filterName === 'color' && deleteColorGood(val)
+
+      // deletePartFilteredItems(newGoods)
+
+      fetchfilteredGoods(filterName, val)
     }
   }
 
@@ -42,8 +70,7 @@ const FilterContainer = ({
       sizes={sizes}
       colors={colors}
       onChange={handleChange}
-      fetchfilteredGoods={fetchfilteredGoods}
-    />
+      fetchfilteredGoods={fetchfilteredGoods} />
   )
 }
 

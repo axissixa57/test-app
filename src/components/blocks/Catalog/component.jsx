@@ -25,7 +25,7 @@ const Catalog = ({ goods, onChangePage }) => {
         <Order />
       </OrderDiv>
       <Goods>
-        {goods.map(item => {
+        {goods && goods.map(item => {
           return (
             <Column
               key={item._id.$oid} xs={24} sm={24} md={12}
@@ -51,6 +51,7 @@ const Catalog = ({ goods, onChangePage }) => {
                     </StyledTag>
                   ))}
                 </Tags>
+                <div>{item.size.map(size => <span key={size}>{size + ' '}</span>)}</div>
               </CardComponent>
             </Column>
           )

@@ -5,9 +5,11 @@ import { GOODS } from '@/constants'
 const initialState = {
   items: [],
   filtredItems: [],
-  isLoading: false,
-  isFilteredByPopular: false,
   filterName: '',
+  tagsGoods: [],
+  sizeGoods: [],
+  colorGoods: [],
+  isLoading: false,
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -22,7 +24,8 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         // filtredItems: [...state.filtredItems, ...payload],
-        filtredItems: _.unionBy(state.filtredItems, payload, '_id.$oid'),
+        // filtredItems: _.unionBy(state.filtredItems, payload, '_id.$oid'),
+        filtredItems: payload,
       }
     case GOODS.SET_FILTERNAME:
       return {
@@ -38,6 +41,36 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         filtredItems: payload,
+      }
+    case GOODS.ADD_TAG:
+      return {
+        ...state,
+        tagsGoods: [...state.tagsGoods, payload],
+      }
+    case GOODS.DELETE_TAG:
+      return {
+        ...state,
+        tagsGoods: state.tagsGoods.filter(tag => tag !== payload),
+      }
+    case GOODS.ADD_COLOR:
+      return {
+        ...state,
+        colorGoods: [...state.colorGoods, payload],
+      }
+    case GOODS.DELETE_COLOR:
+      return {
+        ...state,
+        colorGoods: state.colorGoods.filter(color => color !== payload),
+      }
+    case GOODS.ADD_SIZE:
+      return {
+        ...state,
+        sizeGoods: [...state.sizeGoods, payload],
+      }
+    case GOODS.DELETE_SIZE:
+      return {
+        ...state,
+        sizeGoods: state.sizeGoods.filter(size => size !== payload),
       }
     case GOODS.SET_IS_LOADING:
       return {
