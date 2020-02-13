@@ -7,6 +7,7 @@ const initialState = {
   tagsGoods: [],
   sizeGoods: [],
   colorGoods: [],
+  priceRangeGoods: [0, 110],
   totalCount: 0,
   isLoading: false,
 }
@@ -69,6 +70,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         sizeGoods: state.sizeGoods.filter(size => size !== payload),
+      }
+    case GOODS.CHANGE_PRICE:
+      return {
+        ...state,
+        priceRangeGoods: [...payload],
       }
     case GOODS.SET_IS_LOADING:
       return {

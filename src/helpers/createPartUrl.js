@@ -1,5 +1,6 @@
-export default (tagsGoods, sizeGoods, colorGoods, start, end) => {
+export default (tagsGoods, sizeGoods, colorGoods, priceRangeGoods, start, end) => {
   let url = ''
+  const [min, max] = priceRangeGoods
 
   url = tagsGoods.reduce((url, tagName) => url + `tags_like=${tagName}&`, '')
 
@@ -9,9 +10,9 @@ export default (tagsGoods, sizeGoods, colorGoods, start, end) => {
   colorGoods.length > 0 &&
     (url += colorGoods.reduce((url, color) => url + `color_like=${color}&`, ''))
 
-  console.log(start, end)
-  if (start && end) {
-    console.log('test')
+  url += `price_gte=${min}&price_lte${max}`
+
+  if (start !== undefined && end !== undefined) {
     url += `_start=${start}&_end=${end}`
   }
 

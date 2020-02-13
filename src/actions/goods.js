@@ -31,6 +31,10 @@ const actions = {
     type: GOODS.ADD_SIZE,
     payload: text,
   }),
+  changePriceRangeGoods: range => ({
+    type: GOODS.CHANGE_PRICE,
+    payload: range,
+  }),
   deleteSizeGood: text => ({
     type: GOODS.DELETE_SIZE,
     payload: text,
@@ -87,7 +91,7 @@ const actions = {
   },
   fetchfilteredGoods: () => (dispatch, getState) => {
     const { goods, pagination } = getState()
-    const { tagsGoods, sizeGoods, colorGoods } = goods
+    const { tagsGoods, sizeGoods, colorGoods, priceRangeGoods } = goods
     const { currentPage } = pagination
 
     const start = (currentPage - 1) * 8
@@ -95,7 +99,7 @@ const actions = {
 
     // filtr with a few params
     if (tagsGoods.length > 0 || sizeGoods.length > 0 || colorGoods.length > 0) {
-      const url = createPartUrl(tagsGoods, sizeGoods, colorGoods, start, end)
+      const url = createPartUrl(tagsGoods, sizeGoods, colorGoods, priceRangeGoods, start, end)
 
       goodsApi.filterBySeveralParams(url).then(({ data, headers }) => {
         dispatch(actions.setPartFilteredGoods(data, headers['x-total-count'] || data.length))

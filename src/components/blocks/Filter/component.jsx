@@ -2,6 +2,7 @@ import React from 'react'
 import { Checkbox, Input } from 'antd'
 import PropTypes from 'prop-types'
 
+import { Slider } from '@/components/blocks'
 import { FilterWrapper } from './styles'
 
 const Filter = ({ types, sizes, colors, onChange }) => {
@@ -59,6 +60,7 @@ const Filter = ({ types, sizes, colors, onChange }) => {
           <Input type="number" placeholder="до" onChange={onChange} />
         </div>
       </div>
+      <Slider />
     </FilterWrapper>
   )
 }
