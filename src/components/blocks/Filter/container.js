@@ -13,7 +13,10 @@ const FilterContainer = ({
   deleteColorGood,
   setSizeGood,
   deleteSizeGood,
+  range,
+  changePriceRangeGoods,
 }) => {
+  const [min, max] = range
   const types = [
     'Polos',
     'Pants',
@@ -39,7 +42,7 @@ const FilterContainer = ({
     'white',
   ]
 
-  const handleChange = e => {
+  const handleChangeCheckbox = e => {
     const { filterName, val } = e.target
 
     if (e.target.checked) {
@@ -47,14 +50,26 @@ const FilterContainer = ({
       filterName === 'size' && setSizeGood(val)
       filterName === 'color' && setColorGood(val)
 
-      fetchfilteredGoods(filterName, val)
+      fetchfilteredGoods()
     } else {
       filterName === 'tags' && deleteTagGood(val)
       filterName === 'size' && deleteSizeGood(val)
       filterName === 'color' && deleteColorGood(val)
 
-      fetchfilteredGoods(filterName, val)
+      fetchfilteredGoods()
     }
+  }
+
+  const handleChangeFromRangeInput = e => {
+    const fromValueRange = +e.target.value
+    changePriceRangeGoods([fromValueRange, max])
+    fetchfilteredGoods()
+  }
+
+  const handleChangeToRangeInput = e => {
+    const toValueRange = +e.target.value
+    changePriceRangeGoods([min, toValueRange])
+    fetchfilteredGoods()
   }
 
   return (
@@ -62,8 +77,12 @@ const FilterContainer = ({
       types={types}
       sizes={sizes}
       colors={colors}
-      onChange={handleChange}
-      fetchfilteredGoods={fetchfilteredGoods} />
+      handleChangeCheckbox={handleChangeCheckbox}
+      handleChangeFromRangeInput={handleChangeFromRangeInput}
+      handleChangeToRangeInput={handleChangeToRangeInput}
+      fetchfilteredGoods={fetchfilteredGoods}
+      min={min}
+      max={max} />
   )
 }
 
@@ -75,9 +94,11 @@ FilterContainer.propTypes = {
   deleteColorGood: PropTypes.func.isRequired,
   setSizeGood: PropTypes.func.isRequired,
   deleteSizeGood: PropTypes.func.isRequired,
+  range: PropTypes.arrayOf(PropTypes.number).isRequired,
+  changePriceRangeGoods: PropTypes.func.isRequired,
 }
 
 export default connect(
-  ({ goods }) => ({ goods: goods.filtredItems }),
+  ({ goods }) => ({ goods: goods.filtredItems, range: goods.priceRangeGoods }),
   goodsActions,
 )(FilterContainer)

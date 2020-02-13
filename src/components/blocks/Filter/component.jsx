@@ -5,7 +5,16 @@ import PropTypes from 'prop-types'
 import { Slider } from '@/components/blocks'
 import { FilterWrapper } from './styles'
 
-const Filter = ({ types, sizes, colors, onChange }) => {
+const Filter = ({
+  types,
+  sizes,
+  colors,
+  handleChangeCheckbox,
+  handleChangeFromRangeInput,
+  handleChangeToRangeInput,
+  min,
+  max,
+}) => {
   return (
     <FilterWrapper>
       <div className="filtr-product-type">
@@ -16,7 +25,7 @@ const Filter = ({ types, sizes, colors, onChange }) => {
               key={type}
               filterName="tags"
               val={type}
-              onChange={onChange}
+              onChange={handleChangeCheckbox}
             >
               {type}
             </Checkbox>
@@ -31,7 +40,7 @@ const Filter = ({ types, sizes, colors, onChange }) => {
               key={size}
               filterName="size"
               val={size}
-              onChange={onChange}
+              onChange={handleChangeCheckbox}
             >
               {size}
             </Checkbox>
@@ -46,7 +55,7 @@ const Filter = ({ types, sizes, colors, onChange }) => {
               key={color}
               filterName="color"
               val={color}
-              onChange={onChange}
+              onChange={handleChangeCheckbox}
             >
               {color}
             </Checkbox>
@@ -56,8 +65,8 @@ const Filter = ({ types, sizes, colors, onChange }) => {
       <div className="filtr-product-cost">
         <p>Product cost</p>
         <div>
-          <Input type="number" placeholder="от" onChange={onChange} />
-          <Input type="number" placeholder="до" onChange={onChange} />
+          <Input type="number" placeholder="от" onChange={handleChangeFromRangeInput} value={min} />
+          <Input type="number" placeholder="до" onChange={handleChangeToRangeInput} value={max} />
         </div>
       </div>
       <Slider />
@@ -69,7 +78,11 @@ Filter.propTypes = {
   types: PropTypes.array.isRequired,
   sizes: PropTypes.array.isRequired,
   colors: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired,
+  handleChangeCheckbox: PropTypes.func.isRequired,
+  handleChangeFromRangeInput: PropTypes.func.isRequired,
+  handleChangeToRangeInput: PropTypes.func.isRequired,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
 }
 
 export default Filter
