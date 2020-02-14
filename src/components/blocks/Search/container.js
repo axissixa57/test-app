@@ -1,22 +1,13 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 import Search from './component'
 import { goodsActions } from '@/actions/'
-import { goodsApi } from '@/api/'
 
-const SearchContainer = ({ filterByTitleGoods }) => {
+const SearchContainer = ({ goods, filterByTitleGoods }) => {
   const [visible, setVisible] = useState(false)
-  const [inputValue, setInputValue] = useState('')
-  const [goods, setGoods] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-
-  const onChangeInput = value => {
-    setInputValue(value)
-    setVisible(true)
-    if (value) filterByTitleGoods(value)
-  }
 
   const onShow = () => {
     setVisible(true)
@@ -26,19 +17,10 @@ const SearchContainer = ({ filterByTitleGoods }) => {
     setVisible(false)
   }
 
+  const debSearch = _.debounce(value => filterByTitleGoods(value), 1000)
+
   const onSearch = value => {
-    if (value) {
-      setIsLoading(true)
-      goodsApi
-        .searchByTiitle(value)
-        .then(({ data }) => {
-          setGoods(data)
-          setIsLoading(false)
-        })
-        .catch(() => {
-          setIsLoading(false)
-        })
-    }
+    debSearch(value)
   }
 
   return (
@@ -46,17 +28,19 @@ const SearchContainer = ({ filterByTitleGoods }) => {
       visible={visible}
       setVisible={setVisible}
       goods={goods}
-      inputValue={inputValue}
-      isLoading={isLoading}
       onSearch={onSearch}
-      onChangeInput={onChangeInput}
       onClose={onClose}
-      onShow={onShow} />
+      onShow={onShow}
+    />
   )
 }
 
 SearchContainer.propTypes = {
-  filterByTitleGoods: PropTypes.func,
+  goods: PropTypes.array.isRequired,
+  filterByTitleGoods: PropTypes.func.isRequired,
 }
 
-export default connect(null, goodsActions)(SearchContainer)
+export default connect(
+  ({ goods }) => ({ goods: goods.items }),
+  goodsActions,
+)(SearchContainer)

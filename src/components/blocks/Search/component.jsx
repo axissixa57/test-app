@@ -4,24 +4,23 @@ import PropTypes from 'prop-types'
 
 const { Option } = Select
 
-const Search = ({ visible, inputValue, goods, onClose, onShow, onSearch }) => {
+const Search = ({ visible, goods, onClose, onShow, onSearch }) => {
   const options = goods.map(good => (
     <Option key={good._id.$oid}>{good.title}</Option>
   ))
 
   return (
     <div className="search">
-      <Input.Search
-        placeholder="Поиск"
-        value=""
-        onClick={onShow} />
+      <Input.Search placeholder="Поиск" value="" onClick={onShow} />
       <Modal
-        title="Поиск" width="90%" visible={visible} onCancel={onClose}
+        title="Поиск"
+        width="90%"
+        visible={visible}
+        onCancel={onClose}
         footer={null}
       >
         <Form>
           <Select
-            value={inputValue}
             onSearch={onSearch}
             notFoundContent={null}
             defaultActiveFirstOption={false}
@@ -40,7 +39,6 @@ const Search = ({ visible, inputValue, goods, onClose, onShow, onSearch }) => {
 
 Search.propTypes = {
   visible: PropTypes.bool.isRequired,
-  inputValue: PropTypes.string.isRequired,
   goods: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.shape({

@@ -1,6 +1,9 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
+import { Layout } from 'antd'
 import resetCss from 'reset-css'
 import antdCss from 'antd/dist/antd.css'
+
+const { Content } = Layout
 
 export const dark = {
   primary: '#001529',
@@ -23,4 +26,8 @@ export const GlobalStyle = createGlobalStyle`
     #root, .ant-layout {
      height: 100%;
    }
+`
+
+export const Main = styled(Content)`
+  background: ${({ theme }) => theme.primary};
 `

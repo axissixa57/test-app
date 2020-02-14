@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 
-import Router from '@/Router'
+import Routers from '@/Routers'
 import store from '@/store'
 import { GlobalStyle } from '@/theme/globalStyle'
 import { ThemeProviderWrapper } from '@/components/wrappers'
@@ -11,7 +11,7 @@ const App = () => {
     <Provider store={store}>
       <GlobalStyle />
       <ThemeProviderWrapper>
-        <Router />
+        <Routers />
       </ThemeProviderWrapper>
     </Provider>
   )
