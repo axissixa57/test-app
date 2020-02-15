@@ -3,7 +3,7 @@ import { Layout } from 'antd'
 
 import { Catalog, Header, Filter } from '@/components/blocks/'
 import { Main } from '@/theme/globalStyle'
-import { Sidebar, FooterBlock } from './styles'
+import { Sidebar } from './styles'
 
 const Home = () => {
   return (
@@ -17,7 +17,6 @@ const Home = () => {
           <Catalog />
         </Main>
       </Layout>
-      {/* <FooterBlock>Footer</FooterBlock> */}
     </Layout>
   )
 }

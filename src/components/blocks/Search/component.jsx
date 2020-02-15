@@ -11,9 +11,9 @@ const Search = ({ visible, goods, onClose, onShow, onSearch }) => {
 
   return (
     <div className="search">
-      <Input.Search placeholder="Поиск" value="" onClick={onShow} />
+      <Input.Search placeholder="Search" value="" onClick={onShow} />
       <Modal
-        title="Поиск"
+        title="Search"
         width="90%"
         visible={visible}
         onCancel={onClose}
@@ -26,7 +26,7 @@ const Search = ({ visible, goods, onClose, onShow, onSearch }) => {
             defaultActiveFirstOption={false}
             showArrow={false}
             filterOption={false}
-            placeholder="Поиск"
+            placeholder="Search"
             showSearch
           >
             {options}
