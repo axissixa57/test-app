@@ -4024,6 +4024,20 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
+embla-carousel-react@^1.2.17:
+  version "1.2.17"
+  resolved "https://registry.yarnpkg.com/embla-carousel-react/-/embla-carousel-react-1.2.17.tgz#ddedfd13519be4ce413144ddcbef3da1089eea8d"
+  integrity sha512-TOnmUTE9nBksDjroJDQzz2txFj3sF2yqVZIVVxBGy7u/bYFIlz2fqhWxsoP8QOw4WM21F9zqG+IwhzRa1u/Ssw==
+  dependencies:
+    embla-carousel "^2.7.4"
+    react "^16.8.6"
+    react-dom "^16.8.6"
+
+embla-carousel@^2.7.4:
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-2.7.4.tgz#1f69cb654b9ee60cd9b2e77919e12379a221fd05"
+  integrity sha512-AdZUFVt3deWjli0HrLONsTyvUeQ8gW4T/dezcCK9KEP8dn/TNG3RtHTiqEuUe9dHa5HnPFjx0dt4sfU3i6sLxA==
+
 emoji-regex@^7.0.1, emoji-regex@^7.0.2:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-7.0.3.tgz#933a04052860c85e83c122479c4748a8e4c72156"
@@ -9615,7 +9629,7 @@ react-dev-utils@^10.1.0:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom@^16.12.0:
+react-dom@^16.12.0, react-dom@^16.8.6:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
   integrity sha512-LMxFfAGrcS3kETtQaCkTKjMiifahaMySFDn71fZUNpPHZQEzmk/GiAeIT8JSOrHB23fnuCOMruL2a8NYlw+8Gw==
@@ -9762,7 +9776,7 @@ react-slick@~0.25.2:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
-react@^16.12.0:
+react@^16.12.0, react@^16.8.6:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
@@ -11664,6 +11678,11 @@ value-equal@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-1.0.1.tgz#1e0b794c734c5c0cade179c437d356d931a34d6c"
   integrity sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==
+
+vanilla-lazyload@^12.4.0:
+  version "12.4.0"
+  resolved "https://registry.yarnpkg.com/vanilla-lazyload/-/vanilla-lazyload-12.4.0.tgz#7c4d5c08bab3244565f254eb236cd6b78578c5e6"
+  integrity sha512-MqDh5WvG6qR2ReVFNlICXjrYeEq5VozSxwxOrc17TY4/BRB1pAlcioim18OOrcOg7rElYEgwa5mFL92K8/MEzg==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"

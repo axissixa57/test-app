@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout, Row, Col, Rate, Card, Button } from 'antd'
 import PropTypes from 'prop-types'
 
-import { Header } from '@/components/blocks/'
+import { Header, ImageSlider } from '@/components/blocks/'
 import { Main } from '@/theme/globalStyle'
 import {
   StyledRow,
@@ -38,20 +38,10 @@ const Product = () => {
 
           <StyledCards>
             <Row gutter={16}>
-              <Col span={9} xs={24} sm={24} md={24} lg={9}>
-                <Card
-                  bordered={false}
-                  cover={
-                    <StyledCardPicture
-                      alt="example"
-                      src="https://gloimg.samcdn.com/S/pdm-product-pic/Clothing/2016/06/03/source-img/20160603190149_72043.jpg"
-                    />
-                  }
-                >
-                  Slider
-                </Card>
+              <Col span={12} xs={24} sm={24} md={24} lg={12}>
+                <Card bordered={false}><ImageSlider /></Card>
               </Col>
-              <Col span={15} xs={24} sm={24} md={24} lg={15}>
+              <Col span={12} xs={24} sm={24} md={24} lg={12}>
                 <StyledRightCard bordered={false}>
                   <div className="cost">50$</div>
                   <div className="color">
