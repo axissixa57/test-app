@@ -20,12 +20,16 @@ const EmblaCarouselComponent = ({ children, images }) => {
       togglePrevBtnEnabled(carousel.canScrollPrev())
       toggleNextBtnEnabled(carousel.canScrollNext())
     }
+
     if (carousel) {
       setScrollSnaps(carousel.scrollSnapList())
       carousel.on('select', onSelect)
       onSelect()
     }
-    return () => carousel && carousel.destroy()
+
+    return () => {
+      carousel && carousel.destroy()
+    }
   }, [carousel])
 
   return (
@@ -38,11 +42,13 @@ const EmblaCarouselComponent = ({ children, images }) => {
           htmlTagName="div"
         >
           <div className="carousel__container">
-            {children.map((Child, index) => (
-              <div className="carousel__item" key={index}>
-                {Child}
-              </div>
-            ))}
+            {children.map((Child, index) => {
+              return (
+                <div className="carousel__item" key={index}>
+                  {Child}
+                </div>
+              )
+            })}
           </div>
         </EmblaCarouselReact>
         <PrevBtn onClick={scrollPrev} enabled={prevBtnEnabled} />
@@ -55,8 +61,7 @@ const EmblaCarouselComponent = ({ children, images }) => {
               key={index}
               selected={index === selectedIndex}
               onClick={() => scrollTo(index)}
-              srcImg={images[index]}
-            />
+              srcImg={images[index]} />
           )
         })}
       </div>

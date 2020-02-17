@@ -30,8 +30,7 @@ const SearchContainer = ({ goods, filterByTitleGoods }) => {
       goods={goods}
       onSearch={onSearch}
       onClose={onClose}
-      onShow={onShow}
-    />
+      onShow={onShow} />
   )
 }
 

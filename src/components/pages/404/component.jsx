@@ -14,8 +14,7 @@ const NotMatch = ({ history }) => (
         <Button type="primary" onClick={() => history.push('/')}>
           Back Home
         </Button>
-      }
-    />
+      } />
   </StyledNotMatched>
 )
 

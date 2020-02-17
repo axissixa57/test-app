@@ -1,20 +1,7 @@
 import React from 'react'
 
 export const DotBtn = ({ selected, srcImg, onClick }) => {
-  // console.log(srcImg)
-  return (
-    // <button
-    //   className={`carousel__dot${selected ? " is-selected" : ""}`}
-    //   onClick={onClick}
-    // />
-    <img
-      // className={`carousel__dot${selected ? ' is-selected' : ''}`}
-      // src="https://content2.onliner.by/catalog/device/large/5c0f09a41a9a788fb069b53f01388188.jpeg"
-      src={srcImg}
-      width="50"
-      onClick={onClick}
-    />
-  )
+  return <img src={srcImg} width="50" onClick={onClick} />
 }
 
 export const PrevBtn = ({ enabled, onClick }) => (

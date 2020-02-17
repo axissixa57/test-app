@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Catalog from './component'
-import { goodsActions, paginationActions } from '@/actions/'
+import { goodsActions, paginationActions, productActions } from '@/actions/'
 import { sortGoods } from '@/helpers/'
 
 const CatalogContainer = ({
@@ -15,9 +15,11 @@ const CatalogContainer = ({
   fetchSortedGoods,
   fetchfilteredGoods,
   changeCurrentPage,
+  deleteProductData,
 }) => {
   useEffect(() => {
     fetchPartGoods(0, 8)
+    deleteProductData() // because ImageSlider don't render correct images with last images received
   }, [])
 
   const handleChangePage = page => {
@@ -48,10 +50,9 @@ CatalogContainer.propTypes = {
 export default connect(
   ({ goods, pagination }) => ({
     goods: goods.filtredItems.length ? goods.filtredItems : goods.items,
-    // goods: goods.filtredItems,
     filterName: goods.filterName,
     totalCount: goods.totalCount,
     currentPage: pagination.currentPage,
   }),
-  { ...goodsActions, ...paginationActions },
+  { ...goodsActions, ...paginationActions, ...productActions },
 )(CatalogContainer)

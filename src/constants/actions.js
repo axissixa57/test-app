@@ -15,6 +15,11 @@ export const GOODS = {
   SET_IS_LOADING: 'GOODS:SET_IS_LOADING',
 }
 
+export const PRODUCT = {
+  SET_ITEMS: 'PRODUCT:SET_ITEMS',
+  DELETE_ITEMS: 'PRODUCT:DELETE_ITEMS',
+}
+
 export const THEME = {
   DARK_MODE: 'THEME:DARK_MODE',
 }
