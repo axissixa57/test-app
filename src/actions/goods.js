@@ -57,10 +57,12 @@ const actions = {
     })
   },
   fetchPartGoods: (start, end) => dispatch => {
+    dispatch(actions.setIsLoading(true))
     goodsApi.getPart(start, end).then(({ data, headers }) => {
       // dispatch(actions.setPartGoods(data))
-
       dispatch(actions.setPartFilteredGoods(data, headers['x-total-count']))
+    }).catch(() => {
+      dispatch(actions.setIsLoading(false))
     })
   },
   filterByTitleGoods: text => dispatch => {
@@ -82,6 +84,8 @@ const actions = {
       url = createPartUrl(tagsGoods, sizeGoods, colorGoods, priceRangeGoods)
     }
 
+    dispatch(actions.setIsLoading(true))
+
     goodsApi.sortBy(url, sort, order, start, end).then(({ data, headers }) => {
       if (sort === 'price') {
         sort === 'price' && order === 'asc'
@@ -92,11 +96,19 @@ const actions = {
       }
 
       dispatch(actions.setPartFilteredGoods(data, headers['x-total-count']))
+    }).catch(() => {
+      dispatch(actions.setIsLoading(false))
     })
   },
   fetchfilteredGoods: () => (dispatch, getState) => {
     const { goods, pagination } = getState()
-    const { tagsGoods, sizeGoods, colorGoods, priceRangeGoods, filterName } = goods
+    const {
+      tagsGoods,
+      sizeGoods,
+      colorGoods,
+      priceRangeGoods,
+      filterName,
+    } = goods
     const { currentPage } = pagination
 
     const start = (currentPage - 1) * 8
@@ -119,6 +131,8 @@ const actions = {
         end,
       )
 
+      dispatch(actions.setIsLoading(true))
+
       goodsApi.filterBySeveralParams(url).then(({ data, headers }) => {
         dispatch(
           actions.setPartFilteredGoods(
@@ -131,6 +145,10 @@ const actions = {
       dispatch(actions.fetchPartGoods(start, end))
     }
   },
+  setIsLoading: bool => ({
+    type: GOODS.SET_IS_LOADING,
+    payload: bool,
+  }),
 }
 
 export default actions

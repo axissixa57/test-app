@@ -18,6 +18,7 @@ export const GOODS = {
 export const PRODUCT = {
   SET_ITEMS: 'PRODUCT:SET_ITEMS',
   DELETE_ITEMS: 'PRODUCT:DELETE_ITEMS',
+  SET_IS_LOADING: 'PRODUCT:SET_IS_LOADING',
 }
 
 export const THEME = {

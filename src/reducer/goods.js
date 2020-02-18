@@ -25,6 +25,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         filtredItems: payload.items,
         totalCount: +payload.count,
+        isLoading: false,
       }
     case GOODS.SET_FILTERNAME:
       return {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Rate, Button } from 'antd'
+import { Card, Rate, Button, Skeleton } from 'antd'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -19,7 +19,13 @@ import {
 
 const { Meta } = Card
 
-const Catalog = ({ goods, currentPage, totalCount, onChangePage }) => {
+const Catalog = ({
+  goods,
+  currentPage,
+  totalCount,
+  onChangePage,
+  isLoading,
+}) => {
   return (
     <SectionCatalog>
       <OrderDiv>
@@ -33,37 +39,45 @@ const Catalog = ({ goods, currentPage, totalCount, onChangePage }) => {
                 key={item._id.$oid} xs={24} sm={24} md={12}
                 lg={8} xl={6}
               >
-                <NavLink to={`/product/${item._id.$oid}`}>
-                  <CardComponent
-                    hoverable
-                    cover={<img alt={item.title} src={item.images[0]} />}
-                  >
-                    <PriceHeader>
-                      <span>{item.price + '$'}</span>
-                      <Icons>
-                        <Button type="link" shape="circle" icon="heart" />
-                        <Button
-                          type="link"
-                          shape="circle"
-                          icon="shopping-cart" />
-                      </Icons>
-                    </PriceHeader>
-                    <Meta title={item.title} description={item.description} />
-                    <Rate disabled allowHalf defaultValue={item.rating} />
-                    <Tags>
-                      {item.color.map(color => (
-                        <StyledTag color={color} key={color}>
-                          {color.toUpperCase()}
-                        </StyledTag>
-                      ))}
-                    </Tags>
-                    <div>
-                      {item.size.map(size => (
-                        <span key={size}>{size + ' '}</span>
-                      ))}
-                    </div>
-                  </CardComponent>
-                </NavLink>
+                <Skeleton
+                  active
+                  loading={isLoading}
+                  avatar={{ shape: 'square' }}
+                  title={false}
+                  paragraph={false}
+                >
+                  <NavLink to={`/product/${item._id.$oid}`}>
+                    <CardComponent
+                      hoverable
+                      cover={<img alt={item.title} src={item.images[0]} />}
+                    >
+                      <PriceHeader>
+                        <span>{item.price + '$'}</span>
+                        <Icons>
+                          <Button type="link" shape="circle" icon="heart" />
+                          <Button
+                            type="link"
+                            shape="circle"
+                            icon="shopping-cart" />
+                        </Icons>
+                      </PriceHeader>
+                      <Meta title={item.title} description={item.description} />
+                      <Rate disabled allowHalf defaultValue={item.rating} />
+                      <Tags>
+                        {item.color.map(color => (
+                          <StyledTag color={color} key={color}>
+                            {color.toUpperCase()}
+                          </StyledTag>
+                        ))}
+                      </Tags>
+                      <div>
+                        {item.size.map(size => (
+                          <span key={size}>{size + ' '}</span>
+                        ))}
+                      </div>
+                    </CardComponent>
+                  </NavLink>
+                </Skeleton>
               </Column>
             )
           })}
@@ -94,6 +108,7 @@ Catalog.propTypes = {
   currentPage: PropTypes.number.isRequired,
   totalCount: PropTypes.number.isRequired,
   onChangePage: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }
 
 export default Catalog

@@ -17,6 +17,8 @@ const ImageSlider = ({ images }) => {
   )
 }
 
-ImageSlider.propTypes = {}
+ImageSlider.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string),
+}
 
 export default ImageSlider

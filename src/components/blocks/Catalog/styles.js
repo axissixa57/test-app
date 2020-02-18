@@ -6,7 +6,7 @@ export const SectionCatalog = styled.div`
 `
 export const OrderDiv = styled.div`
   position: relative;
-  display:flex;
+  display: flex;
   justify-content: flex-end;
   padding: 0px 2rem 1rem;
 `
@@ -54,11 +54,16 @@ export const Column = styled(Col)`
     overflow: hidden;
     white-space: nowrap;
   }
+
+  .ant-skeleton-avatar-square {
+    height: 35rem;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 `
 
 export const CardComponent = styled(Card)`
-  width: 240px;
-  margin: 0 auto;
+  margin: 0px 5px;
   margin-bottom: 1rem;
 `
 

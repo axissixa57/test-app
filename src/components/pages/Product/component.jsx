@@ -1,8 +1,8 @@
 import React from 'react'
-import { Layout, Row, Col, Rate, Card, Button } from 'antd'
+import { Row, Col, Rate, Card, Button, Skeleton } from 'antd'
 import PropTypes from 'prop-types'
 
-import { Header, ImageSlider } from '@/components/blocks/'
+import { ImageSlider } from '@/components/blocks/'
 import { Main } from '@/theme/globalStyle'
 import {
   StyledRow,
@@ -14,7 +14,7 @@ import {
 
 const ButtonGroup = Button.Group
 
-const Product = ({ product }) => {
+const Product = ({ product, isLoading }) => {
   const {
     title,
     _id: { $oid: id },
@@ -27,11 +27,10 @@ const Product = ({ product }) => {
   } = product
 
   return (
-    <Layout>
-      <Header />
-      <Main>
-        <div className="product-page">
-          <StyledRow>
+    <Main>
+      <div className="product-page">
+        <StyledRow>
+          <Skeleton active loading={isLoading} paragraph={{ rows: 1 }}>
             <StyledFirstHorizontal>
               <span className="name">{title}</span>
             </StyledFirstHorizontal>
@@ -41,10 +40,18 @@ const Product = ({ product }) => {
               </div>
               <Rate disabled allowHalf defaultValue={rating} />
             </StyledSecondHorizontal>
-          </StyledRow>
+          </Skeleton>
+        </StyledRow>
 
-          <StyledCards>
-            <Row gutter={16}>
+        <StyledCards>
+          <Row gutter={16}>
+            <Skeleton
+              active
+              loading={isLoading}
+              avatar={{ shape: 'square' }}
+              title={false}
+              paragraph={false}
+            >
               <Col
                 span={12} xs={24} sm={24} md={24}
                 lg={12}
@@ -53,6 +60,14 @@ const Product = ({ product }) => {
                   <ImageSlider images={images} />
                 </Card>
               </Col>
+            </Skeleton>
+            <Skeleton
+              active
+              loading={isLoading}
+              avatar={{ shape: 'square' }}
+              title={false}
+              paragraph={false}
+            >
               <Col
                 span={12} xs={24} sm={24} md={24}
                 lg={12}
@@ -85,11 +100,11 @@ const Product = ({ product }) => {
                   </div>
                 </StyledRightCard>
               </Col>
-            </Row>
-          </StyledCards>
-        </div>
-      </Main>
-    </Layout>
+            </Skeleton>
+          </Row>
+        </StyledCards>
+      </div>
+    </Main>
   )
 }
 
@@ -106,6 +121,7 @@ Product.propTypes = {
     images: PropTypes.arrayOf(PropTypes.string),
     color: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }
 
 export default Product

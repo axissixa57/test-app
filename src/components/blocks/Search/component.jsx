@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const { Option } = Select
 
-const Search = ({ visible, goods, onClose, onShow, onSearch }) => {
+const Search = ({ value, visible, goods, onClose, onShow, onSearch, onSelect }) => {
   const options = goods.map(good => (
     <Option key={good._id.$oid}>{good.title}</Option>
   ))
@@ -21,7 +21,9 @@ const Search = ({ visible, goods, onClose, onShow, onSearch }) => {
       >
         <Form>
           <Select
+            value={value}
             onSearch={onSearch}
+            onSelect={onSelect}
             notFoundContent={null}
             defaultActiveFirstOption={false}
             showArrow={false}
@@ -50,6 +52,8 @@ Search.propTypes = {
   onClose: PropTypes.func.isRequired,
   onShow: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 }
 
 export default Search

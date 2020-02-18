@@ -10,11 +10,18 @@ const actions = {
     type: PRODUCT.DELETE_ITEMS,
   }),
   fetchProductById: id => dispatch => {
+    dispatch(actions.setIsLoading(true))
     productApi.getProductById(id).then(res => {
       const [data] = res.data
       dispatch(actions.setProductData(data))
+    }).catch(() => {
+      dispatch(actions.setIsLoading(false))
     })
   },
+  setIsLoading: bool => ({
+    type: PRODUCT.SET_IS_LOADING,
+    payload: bool,
+  }),
 }
 
 export default actions

@@ -7,7 +7,7 @@ export const StyledRow = styled(Row)`
 
 export const StyledFirstHorizontal = styled(Row)`
   .name {
-    color: #000;
+    color: ${({ theme }) => theme.secondary};
     font-weight: 700;
     font-size: 36px;
   }
@@ -20,20 +20,30 @@ export const StyledSecondHorizontal = styled.div`
   .article {
     margin-right: 1rem;
     line-height: 2.5;
+    color: ${({ theme }) => theme.secondary};
 
     .article-code {
-      color: #000;
+      color: ${({ theme }) => theme.secondary};
     }
   }
 `
 
 export const StyledCards = styled.div`
-  background: whitesmoke;
+  background: ${({ theme }) => theme.primary};
   padding: 1rem;
 
   .ant-card-cover {
     display: flex;
     justify-content: center;
+  }
+
+  .ant-row{
+    display: flex;
+
+    .ant-skeleton-avatar-square {
+      width: 100%;
+      height: 30rem;
+    }
   }
 `
 

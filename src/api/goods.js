@@ -1,4 +1,4 @@
-import { axios } from '@/core'
+import { axios } from '@/config'
 
 export default {
   getAll: () => axios.get('/data'),

@@ -16,6 +16,7 @@ const CatalogContainer = ({
   fetchfilteredGoods,
   changeCurrentPage,
   deleteProductData,
+  isLoading,
 }) => {
   useEffect(() => {
     fetchPartGoods(0, 8)
@@ -32,7 +33,8 @@ const CatalogContainer = ({
       goods={goods}
       currentPage={currentPage}
       totalCount={totalCount}
-      onChangePage={handleChangePage} />
+      onChangePage={handleChangePage}
+      isLoading={isLoading} />
   )
 }
 
@@ -45,6 +47,8 @@ CatalogContainer.propTypes = {
   fetchSortedGoods: PropTypes.func.isRequired,
   fetchfilteredGoods: PropTypes.func.isRequired,
   changeCurrentPage: PropTypes.func.isRequired,
+  deleteProductData: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }
 
 export default connect(
@@ -52,6 +56,7 @@ export default connect(
     goods: goods.filtredItems.length ? goods.filtredItems : goods.items,
     filterName: goods.filterName,
     totalCount: goods.totalCount,
+    isLoading: goods.isLoading,
     currentPage: pagination.currentPage,
   }),
   { ...goodsActions, ...paginationActions, ...productActions },
