@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { withRouter } from 'react-router-dom'
 
 import Catalog from './component'
 import { goodsActions, paginationActions, productActions } from '@/actions/'
@@ -14,13 +16,21 @@ const CatalogContainer = ({
   fetchPartGoods,
   fetchSortedGoods,
   fetchfilteredGoods,
+  filterBySeveralParams,
   changeCurrentPage,
   deleteProductData,
   isLoading,
+  history,
+  location,
 }) => {
   useEffect(() => {
-    fetchPartGoods(0, 8)
-    deleteProductData() // because ImageSlider don't render correct images with last images received
+    const url = `${location.pathname}${location.search}`
+    if (url.includes('data')) {
+      filterBySeveralParams(url.substr(6))
+    } else {
+      fetchPartGoods(0, 8)
+      deleteProductData() // because ImageSlider don't render correct images with last images received
+    }
   }, [])
 
   const handleChangePage = page => {
@@ -34,7 +44,8 @@ const CatalogContainer = ({
       currentPage={currentPage}
       totalCount={totalCount}
       onChangePage={handleChangePage}
-      isLoading={isLoading} />
+      isLoading={isLoading}
+    />
   )
 }
 
@@ -51,13 +62,16 @@ CatalogContainer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
 }
 
-export default connect(
-  ({ goods, pagination }) => ({
-    goods: goods.filtredItems.length ? goods.filtredItems : goods.items,
-    filterName: goods.filterName,
-    totalCount: goods.totalCount,
-    isLoading: goods.isLoading,
-    currentPage: pagination.currentPage,
-  }),
-  { ...goodsActions, ...paginationActions, ...productActions },
+export default compose(
+  connect(
+    ({ goods, pagination }) => ({
+      goods: goods.filtredItems.length ? goods.filtredItems : goods.items,
+      filterName: goods.filterName,
+      totalCount: goods.totalCount,
+      isLoading: goods.isLoading,
+      currentPage: pagination.currentPage,
+    }),
+    { ...goodsActions, ...paginationActions, ...productActions },
+  ),
+  withRouter,
 )(CatalogContainer)

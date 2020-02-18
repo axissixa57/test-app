@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { withRouter } from 'react-router-dom'
+import { stringify, parse } from 'query-string'
 
 import { goodsActions } from '@/actions'
 import Filter from './component'
@@ -15,6 +18,8 @@ const FilterContainer = ({
   deleteSizeGood,
   range,
   changePriceRangeGoods,
+  history,
+  location,
 }) => {
   const [min, max] = range
   const types = [
@@ -45,13 +50,49 @@ const FilterContainer = ({
   const handleChangeCheckbox = e => {
     const { filterName, val } = e.target
 
+    // http://localhost:3001/data?tags_like=Polos&price_gte=0&price_lte=110&_start=0&_end=8
+
     if (e.target.checked) {
+      // ====================== вынести в другой файл ===============================
+      const stringified = stringify({ [`${filterName}_like`]: val })
+
+      location.search = !location.search
+        ? `data?${stringified}`
+        : `${location.search}&${stringified}`
+
+      history.push(location.search)
+
+      const parsed = parse(
+        location.search.includes('data') ? stringified : location.search,
+      )
+      // =====================================================
+
       filterName === 'tags' && setTagGood(val)
       filterName === 'size' && setSizeGood(val)
       filterName === 'color' && setColorGood(val)
 
       fetchfilteredGoods()
     } else {
+      // ====================== вынести в другой файл ===============================
+      const parsed = parse(location.search)
+
+      if (`${filterName}_like` in parsed) {
+        const filter = parsed[`${filterName}_like`]
+
+        if (typeof filter === 'string') {
+          parsed[`${filterName}_like`] = null
+        } else if (Array.isArray(filter)) {
+          parsed[`${filterName}_like`] = filter.filter(v => v !== val)
+        }
+      }
+
+      const stringified = stringify(parsed, {
+        skipNull: true,
+      })
+      // =====================================================
+
+      history.push(`data?${stringified}`)
+
       filterName === 'tags' && deleteTagGood(val)
       filterName === 'size' && deleteSizeGood(val)
       filterName === 'color' && deleteColorGood(val)
@@ -82,7 +123,8 @@ const FilterContainer = ({
       handleChangeToRangeInput={handleChangeToRangeInput}
       fetchfilteredGoods={fetchfilteredGoods}
       min={min}
-      max={max} />
+      max={max}
+    />
   )
 }
 
@@ -98,7 +140,13 @@ FilterContainer.propTypes = {
   changePriceRangeGoods: PropTypes.func.isRequired,
 }
 
-export default connect(
-  ({ goods }) => ({ goods: goods.filtredItems, range: goods.priceRangeGoods }),
-  goodsActions,
+export default compose(
+  connect(
+    ({ goods }) => ({
+      goods: goods.filtredItems,
+      range: goods.priceRangeGoods,
+    }),
+    goodsActions,
+  ),
+  withRouter,
 )(FilterContainer)

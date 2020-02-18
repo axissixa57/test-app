@@ -58,12 +58,15 @@ const actions = {
   },
   fetchPartGoods: (start, end) => dispatch => {
     dispatch(actions.setIsLoading(true))
-    goodsApi.getPart(start, end).then(({ data, headers }) => {
-      // dispatch(actions.setPartGoods(data))
-      dispatch(actions.setPartFilteredGoods(data, headers['x-total-count']))
-    }).catch(() => {
-      dispatch(actions.setIsLoading(false))
-    })
+    goodsApi
+      .getPart(start, end)
+      .then(({ data, headers }) => {
+        // dispatch(actions.setPartGoods(data))
+        dispatch(actions.setPartFilteredGoods(data, headers['x-total-count']))
+      })
+      .catch(() => {
+        dispatch(actions.setIsLoading(false))
+      })
   },
   filterByTitleGoods: text => dispatch => {
     goodsApi.searchByTiitle(text).then(({ data }) => {
@@ -86,19 +89,22 @@ const actions = {
 
     dispatch(actions.setIsLoading(true))
 
-    goodsApi.sortBy(url, sort, order, start, end).then(({ data, headers }) => {
-      if (sort === 'price') {
-        sort === 'price' && order === 'asc'
-          ? dispatch(actions.setFilterName('priceAsc'))
-          : dispatch(actions.setFilterName('priceDesc'))
-      } else {
-        dispatch(actions.setFilterName(sort))
-      }
+    goodsApi
+      .sortBy(url, sort, order, start, end)
+      .then(({ data, headers }) => {
+        if (sort === 'price') {
+          sort === 'price' && order === 'asc'
+            ? dispatch(actions.setFilterName('priceAsc'))
+            : dispatch(actions.setFilterName('priceDesc'))
+        } else {
+          dispatch(actions.setFilterName(sort))
+        }
 
-      dispatch(actions.setPartFilteredGoods(data, headers['x-total-count']))
-    }).catch(() => {
-      dispatch(actions.setIsLoading(false))
-    })
+        dispatch(actions.setPartFilteredGoods(data, headers['x-total-count']))
+      })
+      .catch(() => {
+        dispatch(actions.setIsLoading(false))
+      })
   },
   fetchfilteredGoods: () => (dispatch, getState) => {
     const { goods, pagination } = getState()
@@ -133,7 +139,29 @@ const actions = {
 
       dispatch(actions.setIsLoading(true))
 
-      goodsApi.filterBySeveralParams(url).then(({ data, headers }) => {
+      goodsApi
+        .filterBySeveralParams(url)
+        .then(({ data, headers }) => {
+          dispatch(
+            actions.setPartFilteredGoods(
+              data,
+              headers['x-total-count'] || data.length,
+            ),
+          )
+        })
+        .catch(() => {
+          dispatch(actions.setIsLoading(false))
+        })
+    } else {
+      dispatch(actions.fetchPartGoods(start, end))
+    }
+  },
+  filterBySeveralParams: url => dispatch => {
+    dispatch(actions.setIsLoading(true))
+
+    goodsApi
+      .filterBySeveralParams(url)
+      .then(({ data, headers }) => {
         dispatch(
           actions.setPartFilteredGoods(
             data,
@@ -141,9 +169,9 @@ const actions = {
           ),
         )
       })
-    } else {
-      dispatch(actions.fetchPartGoods(start, end))
-    }
+      .catch(() => {
+        dispatch(actions.setIsLoading(false))
+      })
   },
   setIsLoading: bool => ({
     type: GOODS.SET_IS_LOADING,
