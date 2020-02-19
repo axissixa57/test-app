@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import { parse } from 'query-string'
 
 import Catalog from './component'
 import { goodsActions, paginationActions, productActions } from '@/actions/'
@@ -20,18 +21,44 @@ const CatalogContainer = ({
   changeCurrentPage,
   deleteProductData,
   isLoading,
-  history,
   location,
+  resetFiltersAndSort,
 }) => {
   useEffect(() => {
     const url = `${location.pathname}${location.search}`
+
     if (url.includes('data')) {
-      filterBySeveralParams(url.substr(6))
+      const truncatedUrl = url.substr(6)
+      const parsed = parse(truncatedUrl)
+
+      const {
+        color_like: colors = [],
+        size_like: sizes = [],
+        tags_like: tags = [],
+        price_gte: min = 0,
+        price_lte: max = 110,
+        _sort: sort = '',
+        _order: order = '',
+      } = parsed
+
+      const objectWithFilters = {
+        colors,
+        sizes,
+        tags,
+        min,
+        max,
+        sort,
+        order,
+      }
+
+      filterBySeveralParams(truncatedUrl, objectWithFilters)
     } else {
+      resetFiltersAndSort()
       fetchPartGoods(0, 8)
-      deleteProductData() // because ImageSlider don't render correct images with last images received
+      // because ImageSlider don't render correct images with last images received
+      deleteProductData()
     }
-  }, [])
+  }, [location.pathname])
 
   const handleChangePage = page => {
     changeCurrentPage(page)
@@ -44,8 +71,7 @@ const CatalogContainer = ({
       currentPage={currentPage}
       totalCount={totalCount}
       onChangePage={handleChangePage}
-      isLoading={isLoading}
-    />
+      isLoading={isLoading} />
   )
 }
 
@@ -59,7 +85,13 @@ CatalogContainer.propTypes = {
   fetchfilteredGoods: PropTypes.func.isRequired,
   changeCurrentPage: PropTypes.func.isRequired,
   deleteProductData: PropTypes.func.isRequired,
+  filterBySeveralParams: PropTypes.func.isRequired,
+  resetFiltersAndSort: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+  }),
 }
 
 export default compose(

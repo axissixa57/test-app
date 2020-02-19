@@ -8,7 +8,7 @@ export const OrderDiv = styled.div`
   position: relative;
   display: flex;
   justify-content: flex-end;
-  padding: 0px 2rem 1rem;
+  padding: 0 0.4rem 1rem;
 `
 export const PaginationBlock = styled(Pagination)`
   display: flex;

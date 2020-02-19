@@ -20,6 +20,9 @@ const FilterContainer = ({
   changePriceRangeGoods,
   history,
   location,
+  tagsGoods,
+  sizeGoods,
+  colorGoods,
 }) => {
   const [min, max] = range
   const types = [
@@ -61,10 +64,6 @@ const FilterContainer = ({
         : `${location.search}&${stringified}`
 
       history.push(location.search)
-
-      const parsed = parse(
-        location.search.includes('data') ? stringified : location.search,
-      )
       // =====================================================
 
       filterName === 'tags' && setTagGood(val)
@@ -89,9 +88,9 @@ const FilterContainer = ({
       const stringified = stringify(parsed, {
         skipNull: true,
       })
-      // =====================================================
 
       history.push(`data?${stringified}`)
+      // =====================================================
 
       filterName === 'tags' && deleteTagGood(val)
       filterName === 'size' && deleteSizeGood(val)
@@ -103,12 +102,52 @@ const FilterContainer = ({
 
   const handleChangeFromRangeInput = e => {
     const fromValueRange = +e.target.value
+
+    // ====================== вынести в другой файл ===============================
+    const parsed = parse(location.search)
+
+    if ('price_gte' in parsed || 'price_lte' in parsed) {
+      location.search = location.search.replace(
+        /&?price_gte=[0-9]{1,}&price_lte=[0-9]{1,}&?/,
+        '',
+      )
+    }
+
+    const stringified = stringify({ price_gte: fromValueRange, price_lte: max })
+
+    location.search = !location.search
+      ? `data?${stringified}`
+      : `${location.search}&${stringified}`
+
+    history.push(location.search)
+    // =====================================================
+
     changePriceRangeGoods([fromValueRange, max])
     fetchfilteredGoods()
   }
 
   const handleChangeToRangeInput = e => {
     const toValueRange = +e.target.value
+
+    // ====================== вынести в другой файл ===============================
+    const parsed = parse(location.search)
+
+    if ('price_gte' in parsed || 'price_lte' in parsed) {
+      location.search = location.search.replace(
+        /&?price_gte=[0-9]{1,}&price_lte=[0-9]{1,}&?/,
+        '',
+      )
+    }
+
+    const stringified = stringify({ price_gte: min, price_lte: toValueRange })
+
+    location.search = !location.search
+      ? `data?${stringified}`
+      : `${location.search}&${stringified}`
+
+    history.push(location.search)
+    // =====================================================
+
     changePriceRangeGoods([min, toValueRange])
     fetchfilteredGoods()
   }
@@ -124,7 +163,9 @@ const FilterContainer = ({
       fetchfilteredGoods={fetchfilteredGoods}
       min={min}
       max={max}
-    />
+      tagsGoods={tagsGoods}
+      sizeGoods={sizeGoods}
+      colorGoods={colorGoods} />
   )
 }
 
@@ -138,12 +179,25 @@ FilterContainer.propTypes = {
   deleteSizeGood: PropTypes.func.isRequired,
   range: PropTypes.arrayOf(PropTypes.number).isRequired,
   changePriceRangeGoods: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+  tagsGoods: PropTypes.arrayOf(PropTypes.string),
+  sizeGoods: PropTypes.arrayOf(PropTypes.string),
+  colorGoods: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default compose(
   connect(
     ({ goods }) => ({
       goods: goods.filtredItems,
+      tagsGoods: goods.tagsGoods,
+      sizeGoods: goods.sizeGoods,
+      colorGoods: goods.colorGoods,
       range: goods.priceRangeGoods,
     }),
     goodsActions,

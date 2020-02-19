@@ -14,6 +14,9 @@ const Filter = ({
   handleChangeToRangeInput,
   min,
   max,
+  tagsGoods,
+  sizeGoods,
+  colorGoods,
 }) => {
   return (
     <FilterWrapper>
@@ -23,6 +26,7 @@ const Filter = ({
           {types.map(type => (
             <Checkbox
               key={type}
+              checked={tagsGoods.some(tag => tag === type)}
               filterName="tags"
               val={type}
               onChange={handleChangeCheckbox}
@@ -38,6 +42,7 @@ const Filter = ({
           {sizes.map(size => (
             <Checkbox
               key={size}
+              checked={sizeGoods.some(s => s === size)}
               filterName="size"
               val={size}
               onChange={handleChangeCheckbox}
@@ -53,6 +58,7 @@ const Filter = ({
           {colors.map(color => (
             <Checkbox
               key={color}
+              checked={colorGoods.some(c => c === color)}
               filterName="color"
               val={color}
               onChange={handleChangeCheckbox}
@@ -65,8 +71,16 @@ const Filter = ({
       <div className="filtr-product-cost">
         <p>Product cost</p>
         <div>
-          <Input type="number" placeholder="от" onChange={handleChangeFromRangeInput} value={min} />
-          <Input type="number" placeholder="до" onChange={handleChangeToRangeInput} value={max} />
+          <Input
+            type="number"
+            placeholder="от"
+            onChange={handleChangeFromRangeInput}
+            value={min} />
+          <Input
+            type="number"
+            placeholder="до"
+            onChange={handleChangeToRangeInput}
+            value={max} />
         </div>
       </div>
       <Slider />
@@ -83,6 +97,9 @@ Filter.propTypes = {
   handleChangeToRangeInput: PropTypes.func.isRequired,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
+  tagsGoods: PropTypes.arrayOf(PropTypes.string),
+  sizeGoods: PropTypes.arrayOf(PropTypes.string),
+  colorGoods: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default Filter

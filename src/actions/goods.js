@@ -156,7 +156,7 @@ const actions = {
       dispatch(actions.fetchPartGoods(start, end))
     }
   },
-  filterBySeveralParams: url => dispatch => {
+  filterBySeveralParams: (url, objectWithFilters) => dispatch => {
     dispatch(actions.setIsLoading(true))
 
     goodsApi
@@ -168,14 +168,23 @@ const actions = {
             headers['x-total-count'] || data.length,
           ),
         )
+
+        dispatch(actions.setFiltersAndSortValues(objectWithFilters))
       })
       .catch(() => {
         dispatch(actions.setIsLoading(false))
       })
   },
+  setFiltersAndSortValues: obj => ({
+    type: GOODS.SET_VALUES_FROM_QUERIES,
+    payload: obj,
+  }),
   setIsLoading: bool => ({
     type: GOODS.SET_IS_LOADING,
     payload: bool,
+  }),
+  resetFiltersAndSort: () => ({
+    type: GOODS.RESET_FILTERS_AND_SORT,
   }),
 }
 

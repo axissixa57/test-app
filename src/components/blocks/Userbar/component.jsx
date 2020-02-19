@@ -2,18 +2,18 @@ import React from 'react'
 import { Icon } from 'antd'
 import PropTypes from 'prop-types'
 
-import { Basket, UserBarStyled, ButtonLogin, ButtonBulb } from './styles'
+import { Basket, ButtonLogin, ButtonBulb } from './styles'
 
 const UserBar = ({ switchDarkMode }) => {
   return (
-    <UserBarStyled>
+    <div className="userbar">
       <Basket>
         <ButtonLogin>Login</ButtonLogin>
         <ButtonBulb onClick={switchDarkMode}>
           <Icon type="bulb" />
         </ButtonBulb>
       </Basket>
-    </UserBarStyled>
+    </div>
   )
 }
 

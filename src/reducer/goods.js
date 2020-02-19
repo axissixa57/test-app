@@ -82,6 +82,32 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         isLoading: payload,
       }
+    case GOODS.SET_VALUES_FROM_QUERIES: {
+      const { tags, sizes, colors, min, max, sort, order } = payload
+
+      return {
+        ...state,
+        tagsGoods: typeof tags === 'string' ? [tags] : tags,
+        sizeGoods: typeof sizes === 'string' ? [sizes] : sizes,
+        colorGoods: typeof colors === 'string' ? [colors] : colors,
+        priceRangeGoods: [+min, +max],
+        filterName:
+          sort === 'rating'
+            ? 'rating'
+            : sort === 'price' && order === 'asc'
+              ? 'priceAsc'
+              : 'priceDesc',
+      }
+    }
+    case GOODS.RESET_FILTERS_AND_SORT:
+      return {
+        ...state,
+        filterName: '',
+        tagsGoods: [],
+        sizeGoods: [],
+        colorGoods: [],
+        priceRangeGoods: [0, 110],
+      }
     default:
       return state
   }
