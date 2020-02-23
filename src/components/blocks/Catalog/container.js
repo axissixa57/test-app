@@ -7,7 +7,7 @@ import { parse } from 'query-string'
 
 import Catalog from './component'
 import { goodsActions, paginationActions, productActions } from '@/actions/'
-import { sortGoods } from '@/helpers/'
+import { sortGoods, queryToUrl } from '@/helpers/'
 
 const CatalogContainer = ({
   goods,
@@ -22,6 +22,7 @@ const CatalogContainer = ({
   deleteProductData,
   isLoading,
   location,
+  history,
   resetFiltersAndSort,
 }) => {
   useEffect(() => {
@@ -39,6 +40,7 @@ const CatalogContainer = ({
         price_lte: max = 110,
         _sort: sort = '',
         _order: order = '',
+        page = 1,
       } = parsed
 
       const objectWithFilters = {
@@ -52,6 +54,7 @@ const CatalogContainer = ({
       }
 
       filterBySeveralParams(truncatedUrl, objectWithFilters)
+      changeCurrentPage(page)
     } else {
       resetFiltersAndSort()
       fetchPartGoods(0, 8)
@@ -62,6 +65,7 @@ const CatalogContainer = ({
 
   const handleChangePage = page => {
     changeCurrentPage(page)
+    queryToUrl.updatePage(page, location, history)
     sortGoods(page, filterName, fetchfilteredGoods, fetchSortedGoods)
   }
 
@@ -92,6 +96,7 @@ CatalogContainer.propTypes = {
     pathname: PropTypes.string.isRequired,
     search: PropTypes.string.isRequired,
   }),
+  history: PropTypes.object.isRequired,
 }
 
 export default compose(

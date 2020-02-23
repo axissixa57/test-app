@@ -31,6 +31,12 @@ const Catalog = ({
       <OrderDiv>
         <Order />
       </OrderDiv>
+      <PaginationBlock
+        current={currentPage}
+        total={totalCount}
+        pageSize={8}
+        size="small"
+        onChange={onChangePage} />
       <Goods>
         {goods &&
           goods.map(item => {

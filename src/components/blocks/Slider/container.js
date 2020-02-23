@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
-import { stringify, parse } from 'query-string'
 
 import Slider from './component'
 import { goodsActions } from '@/actions/'
+import { queryToUrl } from '@/helpers'
 
 const SliderContainer = ({
   priceRangeGoods,
@@ -16,24 +16,7 @@ const SliderContainer = ({
   history,
 }) => {
   const handleChange = range => {
-    // ====================== вынести в другой файл ===============================
-    const parsed = parse(location.search)
-
-    if ('price_gte' in parsed || 'price_lte' in parsed) {
-      location.search = location.search.replace(
-        /&?price_gte=[0-9]{1,}&price_lte=[0-9]{1,}&?/,
-        '',
-      )
-    }
-
-    const stringified = stringify({ price_gte: range[0], price_lte: range[1] })
-
-    location.search = !location.search
-      ? `data?${stringified}`
-      : `${location.search}&${stringified}`
-
-    history.push(location.search)
-    // =====================================================
+    queryToUrl.updatePrice(range[0], range[1], location, history)
 
     changePriceRangeGoods(range)
     fetchfilteredGoods()

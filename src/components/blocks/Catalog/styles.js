@@ -13,6 +13,7 @@ export const OrderDiv = styled.div`
 export const PaginationBlock = styled(Pagination)`
   display: flex;
   justify-content: center;
+  padding: 0 0 1rem 0;
 
   .ant-pagination-item a {
     color: ${({ theme }) => theme.secondary};

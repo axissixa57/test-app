@@ -9,7 +9,7 @@ export default (state = initialState, { type, payload }) => {
     case PAGINATION.SET_CURRENT_PAGE:
       return {
         ...state,
-        currentPage: payload,
+        currentPage: +payload,
       }
     default:
       return state

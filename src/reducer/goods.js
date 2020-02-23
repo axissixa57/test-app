@@ -96,7 +96,9 @@ export default (state = initialState, { type, payload }) => {
             ? 'rating'
             : sort === 'price' && order === 'asc'
               ? 'priceAsc'
-              : 'priceDesc',
+              : sort === ''
+                ? ''
+                : 'priceDesc',
       }
     }
     case GOODS.RESET_FILTERS_AND_SORT:

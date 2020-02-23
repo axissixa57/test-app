@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     ${resetCss}
     ${antdCss}
 
-    #root, .ant-layout {
+    #root, .ant-layout, .app-wrapper-content {
      height: 100%;
    }
 `
