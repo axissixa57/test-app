@@ -1,6 +1,7 @@
 import React from 'react'
 import { Checkbox, Input } from 'antd'
 import PropTypes from 'prop-types'
+import { FormattedMessage } from 'react-intl'
 
 import { Slider } from '@/components/blocks'
 import { FilterWrapper } from './styles'
@@ -21,7 +22,9 @@ const Filter = ({
   return (
     <FilterWrapper>
       <div className="filtr-product-type">
-        <p>Product type</p>
+        <p>
+          <FormattedMessage id="productType" />
+        </p>
         <div>
           {types.map(type => (
             <Checkbox
@@ -31,13 +34,15 @@ const Filter = ({
               val={type}
               onChange={handleChangeCheckbox}
             >
-              {type}
+              <FormattedMessage id={type.toLowerCase()} />
             </Checkbox>
           ))}
         </div>
       </div>
       <div className="filtr-product-size">
-        <p>Product size</p>
+        <p>
+          <FormattedMessage id="productSize" />
+        </p>
         <div>
           {sizes.map(size => (
             <Checkbox
@@ -53,7 +58,9 @@ const Filter = ({
         </div>
       </div>
       <div className="filtr-product-color">
-        <p>Product color</p>
+        <p>
+          <FormattedMessage id="productColor" />
+        </p>
         <div>
           {colors.map(color => (
             <Checkbox
@@ -63,13 +70,15 @@ const Filter = ({
               val={color}
               onChange={handleChangeCheckbox}
             >
-              {color}
+              <FormattedMessage id={color} />
             </Checkbox>
           ))}
         </div>
       </div>
       <div className="filtr-product-cost">
-        <p>Product cost</p>
+        <p>
+          <FormattedMessage id="productCost" />
+        </p>
         <div>
           <Input
             type="number"
@@ -89,17 +98,17 @@ const Filter = ({
 }
 
 Filter.propTypes = {
-  types: PropTypes.array.isRequired,
-  sizes: PropTypes.array.isRequired,
-  colors: PropTypes.array.isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
   handleChangeCheckbox: PropTypes.func.isRequired,
   handleChangeFromRangeInput: PropTypes.func.isRequired,
   handleChangeToRangeInput: PropTypes.func.isRequired,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
-  tagsGoods: PropTypes.arrayOf(PropTypes.string),
-  sizeGoods: PropTypes.arrayOf(PropTypes.string),
-  colorGoods: PropTypes.arrayOf(PropTypes.string),
+  tagsGoods: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sizeGoods: PropTypes.arrayOf(PropTypes.string).isRequired,
+  colorGoods: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 export default Filter

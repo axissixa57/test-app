@@ -4,14 +4,19 @@ import { Provider } from 'react-redux'
 import Routers from '@/Routers'
 import store from '@/store'
 import { GlobalStyle } from '@/theme/globalStyle'
-import { ThemeProviderWrapper } from '@/components/wrappers'
+import {
+  ThemeProviderWrapper,
+  IntlProviderWrapper,
+} from '@/components/wrappers'
 
 const App = () => {
   return (
     <Provider store={store}>
       <GlobalStyle />
       <ThemeProviderWrapper>
-        <Routers />
+        <IntlProviderWrapper>
+          <Routers />
+        </IntlProviderWrapper>
       </ThemeProviderWrapper>
     </Provider>
   )
