@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react'
 import LazyLoad from 'vanilla-lazyload'
+import PropTypes from 'prop-types'
 
 const Context = createContext()
 const options = { elements_selector: '.lazyImage__img' }
@@ -20,3 +21,7 @@ export const withLazyImageContext = Component => props => (
     {context => <Component {...props} lazyLoad={context} />}
   </Context.Consumer>
 )
+
+LazyImageProvider.propTypes = {
+  children: PropTypes.object.isRequired,
+}

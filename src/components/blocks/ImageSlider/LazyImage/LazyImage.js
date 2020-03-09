@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+
 import { withLazyImageContext } from './LazyImageContext'
-import './lazyImage.css'
+import { LazyImageStyled } from './styles'
 
 const LazyImage = ({ src, aspectRatio, lazyLoad }) => {
   useEffect(() => {
@@ -8,10 +10,20 @@ const LazyImage = ({ src, aspectRatio, lazyLoad }) => {
   }, [src, aspectRatio, lazyLoad])
 
   return (
-    <div className="lazyImage" style={{ paddingTop: '100%' }}>
+    <LazyImageStyled style={{ paddingTop: '100%' }}>
       <img className="lazyImage__img" data-src={src} />
-    </div>
+    </LazyImageStyled>
   )
+}
+
+LazyImage.defaultProps = {
+  lazyLoad: null,
+}
+
+LazyImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  aspectRatio: PropTypes.arrayOf(PropTypes.number).isRequired,
+  lazyLoad: PropTypes.object,
 }
 
 export default withLazyImageContext(LazyImage)

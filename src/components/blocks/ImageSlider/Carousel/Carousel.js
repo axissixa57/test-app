@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import EmblaCarouselReact from 'embla-carousel-react'
+import PropTypes from 'prop-types'
+
 import { PrevBtn, NextBtn, DotBtn } from './CarouselButtons'
-import './carousel.css'
+import { Carousel, CarouselWrap, CarouselViewport, CarouselContainer, CarouselItem, CarouselDots } from './styles'
 
 const EmblaCarouselComponent = ({ children, images }) => {
   const [carousel, initCarousel] = useState(null)
@@ -33,28 +34,27 @@ const EmblaCarouselComponent = ({ children, images }) => {
   }, [carousel])
 
   return (
-    <div className="carousel">
-      <div className="carousel__wrap">
-        <EmblaCarouselReact
-          className="carousel__viewport"
+    <Carousel>
+      <CarouselWrap>
+        <CarouselViewport
           emblaRef={initCarousel}
           options={{ loop: false }}
           htmlTagName="div"
         >
-          <div className="carousel__container">
+          <CarouselContainer>
             {children.map((Child, index) => {
               return (
-                <div className="carousel__item" key={index}>
+                <CarouselItem key={index}>
                   {Child}
-                </div>
+                </CarouselItem>
               )
             })}
-          </div>
-        </EmblaCarouselReact>
+          </CarouselContainer>
+        </CarouselViewport>
         <PrevBtn onClick={scrollPrev} enabled={prevBtnEnabled} />
         <NextBtn onClick={scrollNext} enabled={nextBtnEnabled} />
-      </div>
-      <div className="carousel__dots">
+      </CarouselWrap>
+      <CarouselDots>
         {scrollSnaps.map((snap, index) => {
           return (
             <DotBtn
@@ -64,9 +64,14 @@ const EmblaCarouselComponent = ({ children, images }) => {
               srcImg={images[index]} />
           )
         })}
-      </div>
-    </div>
+      </CarouselDots>
+    </Carousel>
   )
+}
+
+EmblaCarouselComponent.propTypes = {
+  children: PropTypes.array.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 export default EmblaCarouselComponent
