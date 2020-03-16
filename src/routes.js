@@ -54,8 +54,9 @@ const routes = [
   {
     path: '/product/:id',
     component: Product,
-    fetchInitialData: (store, path = '') => store.dispatch(fetchProductById(path.split('/').pop())) 
-  }
+    fetchInitialData: (store, path = '') =>
+      store.dispatch(fetchProductById(path.split('/').pop())),
+  },
 ]
 
 export default routes

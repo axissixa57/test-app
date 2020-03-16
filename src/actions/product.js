@@ -11,12 +11,15 @@ const actions = {
   }),
   fetchProductById: id => dispatch => {
     dispatch(actions.setIsLoading(true))
-    return productApi.getProductById(id).then(res => {
-      const [data] = res.data
-      dispatch(actions.setProductData(data))
-    }).catch(() => {
-      dispatch(actions.setIsLoading(false))
-    })
+    return productApi
+      .getProductById(id)
+      .then(res => {
+        const [data] = res.data
+        dispatch(actions.setProductData(data))
+      })
+      .catch(() => {
+        dispatch(actions.setIsLoading(false))
+      })
   },
   setIsLoading: bool => ({
     type: PRODUCT.SET_IS_LOADING,

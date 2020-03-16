@@ -20,8 +20,7 @@ export default () => {
                 <Route exact path="/product/:id" component={Product} />
               </Layout>
             </div>
-          )}
-        />
+          )} />
         <Route component={NotMatch} />
       </Switch>
     </>

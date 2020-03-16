@@ -4,7 +4,7 @@ import { PageHeader } from 'antd'
 export const Header = styled(PageHeader)`
   border: 1px solid rgb(235, 237, 240);
   background: ${({ theme }) => theme.primary};
-  
+
   & > div {
     display: flex;
     justify-content: space-between;

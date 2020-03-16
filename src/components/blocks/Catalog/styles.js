@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Col, Card, Tag, Pagination } from 'antd'
+import { Col, Card, Tag } from 'antd'
 
 export const SectionCatalog = styled.div`
   padding: 1rem;
@@ -10,24 +10,6 @@ export const OrderDiv = styled.div`
   justify-content: flex-end;
   padding: 0 0.4rem 1rem;
 `
-export const PaginationBlock = styled(Pagination)`
-  display: flex;
-  justify-content: center;
-  padding: 0 0 1rem 0;
-
-  .ant-pagination-item a {
-    color: ${({ theme }) => theme.secondary};
-  }
-
-  .ant-pagination-item-active a {
-    color: ${({ theme }) => theme.black};
-  }
-
-  .ant-pagination-item-link {
-    color: ${({ theme }) => theme.secondary};
-  }
-`
-
 export const Goods = styled.div`
   display: flex;
   flex-wrap: wrap;

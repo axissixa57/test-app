@@ -75,8 +75,7 @@ const CatalogContainer = ({
       currentPage={currentPage}
       totalCount={totalCount}
       onChangePage={handleChangePage}
-      isLoading={isLoading}
-    />
+      isLoading={isLoading} />
   )
 }
 

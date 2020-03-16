@@ -3,11 +3,10 @@ import { Card, Rate, Button, Skeleton } from 'antd'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { Order } from '@/components/blocks/'
+import { Order, Pagination } from '@/components/blocks/'
 import {
   SectionCatalog,
   OrderDiv,
-  PaginationBlock,
   Goods,
   Column,
   CardComponent,
@@ -31,7 +30,7 @@ const Catalog = ({
       <OrderDiv>
         <Order />
       </OrderDiv>
-      <PaginationBlock
+      <Pagination
         current={currentPage}
         total={totalCount}
         pageSize={8}
@@ -88,7 +87,7 @@ const Catalog = ({
             )
           })}
       </Goods>
-      <PaginationBlock
+      <Pagination
         current={currentPage}
         total={totalCount}
         pageSize={8}

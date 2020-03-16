@@ -7,8 +7,12 @@ import { Basket, ButtonLogin, ButtonBulb } from './styles'
 const UserBar = ({ switchDarkMode, onHandleClickLang }) => {
   const menu = (
     <Menu>
-      <Menu.Item key="en" onClick={onHandleClickLang}>EN</Menu.Item>
-      <Menu.Item key="ru" onClick={onHandleClickLang}>RU</Menu.Item>
+      <Menu.Item key="en" onClick={onHandleClickLang}>
+        EN
+      </Menu.Item>
+      <Menu.Item key="ru" onClick={onHandleClickLang}>
+        RU
+      </Menu.Item>
     </Menu>
   )
 

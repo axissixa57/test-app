@@ -2,7 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { PrevBtn, NextBtn, DotBtn } from './CarouselButtons'
-import { Carousel, CarouselWrap, CarouselViewport, CarouselContainer, CarouselItem, CarouselDots } from './styles'
+import {
+  Carousel,
+  CarouselWrap,
+  CarouselViewport,
+  CarouselContainer,
+  CarouselItem,
+  CarouselDots,
+} from './styles'
 
 const EmblaCarouselComponent = ({ children, images }) => {
   const [carousel, initCarousel] = useState(null)
@@ -43,11 +50,7 @@ const EmblaCarouselComponent = ({ children, images }) => {
         >
           <CarouselContainer>
             {children.map((Child, index) => {
-              return (
-                <CarouselItem key={index}>
-                  {Child}
-                </CarouselItem>
-              )
+              return <CarouselItem key={index}>{Child}</CarouselItem>
             })}
           </CarouselContainer>
         </CarouselViewport>

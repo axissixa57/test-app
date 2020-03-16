@@ -37,7 +37,7 @@ export const StyledCards = styled.div`
     justify-content: center;
   }
 
-  .ant-row{
+  .ant-row {
     display: flex;
 
     .ant-skeleton-avatar-square {

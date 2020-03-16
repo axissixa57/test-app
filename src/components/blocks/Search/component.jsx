@@ -4,7 +4,15 @@ import PropTypes from 'prop-types'
 
 const { Option } = Select
 
-const Search = ({ value, visible, goods, onClose, onShow, onSearch, onSelect }) => {
+const Search = ({
+  value,
+  visible,
+  goods,
+  onClose,
+  onShow,
+  onSearch,
+  onSelect,
+}) => {
   const options = goods.map(good => (
     <Option key={good._id.$oid}>{good.title}</Option>
   ))
