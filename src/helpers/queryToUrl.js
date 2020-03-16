@@ -29,6 +29,26 @@ export default {
 
     history.push(`data?${stringified}`)
   },
+  addSort: (location, history, sortName, order) => {
+    const parsed = parse(location.search)
+
+    if ('_sort' in parsed) {
+      parsed._sort = sortName
+      parsed._order = order
+
+      const stringified = stringify(parsed)
+
+      history.push(`data?${stringified}`)
+    } else {
+      const stringified = stringify({ _sort: sortName, _order: order })
+
+      location.search = !location.search
+        ? `data?${stringified}`
+        : `${location.search}&${stringified}`
+
+      history.push(location.search)
+    }
+  },
   updatePrice: (min, max, location, history) => {
     const parsed = parse(location.search)
 

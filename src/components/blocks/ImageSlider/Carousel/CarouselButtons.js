@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { CarouselArrowBtn, CarouselArrowBtnSvg } from './styles'
 
 export const DotBtn = ({ selected, srcImg, onClick }) => {
-  return <img src={srcImg} width="50" onClick={onClick} />
+  return <img src={srcImg} width="50" onClick={onClick} alt="" />
 }
 
 export const PrevBtn = ({ enabled, onClick }) => (

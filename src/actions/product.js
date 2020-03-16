@@ -11,7 +11,7 @@ const actions = {
   }),
   fetchProductById: id => dispatch => {
     dispatch(actions.setIsLoading(true))
-    productApi.getProductById(id).then(res => {
+    return productApi.getProductById(id).then(res => {
       const [data] = res.data
       dispatch(actions.setProductData(data))
     }).catch(() => {

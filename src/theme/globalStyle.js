@@ -1,6 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import { Layout } from 'antd'
-import resetCss from 'reset-css'
 import antdCss from 'antd/dist/antd.css'
 
 const { Content } = Layout
@@ -20,7 +19,6 @@ export const light = {
 }
 
 export const GlobalStyle = createGlobalStyle`
-    ${resetCss}
     ${antdCss}
 
     #root, .ant-layout, .app-wrapper-content {

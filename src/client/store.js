@@ -9,6 +9,10 @@ const middlewares = [thunkMiddleware]
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares))
 
-const store = createStore(rootReducer, enhancer)
+const preloadedState = window.__INITIAL_DATA__;
+
+delete window.__INITIAL_DATA__;
+
+const store = createStore(rootReducer, preloadedState, enhancer)
 
 export default store

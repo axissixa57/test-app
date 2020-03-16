@@ -58,7 +58,7 @@ const actions = {
   },
   fetchPartGoods: (start, end) => dispatch => {
     dispatch(actions.setIsLoading(true))
-    goodsApi
+    return goodsApi
       .getPart(start, end)
       .then(({ data, headers }) => {
         // dispatch(actions.setPartGoods(data))
@@ -159,7 +159,7 @@ const actions = {
   filterBySeveralParams: (url, objectWithFilters) => dispatch => {
     dispatch(actions.setIsLoading(true))
 
-    goodsApi
+    return goodsApi
       .filterBySeveralParams(url)
       .then(({ data, headers }) => {
         dispatch(
