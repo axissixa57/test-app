@@ -1,3 +1,5 @@
+to fix errors, it will help --- https://github.com/storybookjs/storybook/issues/10477#issuecomment-619476099
+
 **WARNING: This is the documentation for `razzle@next` (Webpack 4).**  
 [Go here for for razzle@0.8.x (stable) docs (Webpack 3)](https://github.com/jaredpalmer/razzle/tree/master).
 
